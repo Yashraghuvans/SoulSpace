@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import NavBar from '../Components/NavBar';
 
 const copingSkillsLibrary = [
     {
@@ -66,6 +67,22 @@ const copingSkillsLibrary = [
         feelingTags: ['stressed', 'anxious', 'tense'],
         timeRequired: '15-20 minutes',
         steps: ['Find a comfortable position.', 'Tense a specific muscle group (e.g., your fists) for 5-10 seconds.', 'Release the tension suddenly and notice the difference.', 'Repeat with other muscle groups (arms, shoulders, face, etc.).'],
+    },
+    {
+        id: 9,
+        name: 'Visualize a Calm Place',
+        description: 'Imagine a peaceful and relaxing environment.',
+        feelingTags: ['stressed', 'anxious', 'overwhelmed'],
+        timeRequired: '< 5 minutes',
+        steps: ['Close your eyes.', 'Imagine a place where you feel completely calm and safe.', 'Engage your senses: what do you see, hear, smell, feel?', 'Stay with this image for a few minutes.'],
+    },
+    {
+        id: 10,
+        name: 'Do a Puzzle',
+        description: 'Engaging in a simple puzzle can distract from worries.',
+        feelingTags: ['anxious', 'bored', 'restless'],
+        timeRequired: '10-20 minutes',
+        steps: ['Find a simple puzzle (e.g., Sudoku, crossword, jigsaw).', 'Focus your attention on solving it.', 'Allow yourself to get absorbed in the task.'],
     },
 ];
 
@@ -167,117 +184,124 @@ const CopingSkillMatcher = () => {
 
     return (
         <>
-            <motion.div
-                className="bg-white p-8 rounded-xl shadow-lg flex justify-center flex-col items-center"
-                variants={containerVariants}
-                initial="initial"
-                animate="animate"
+            <div className="bg-cover bg-center bg-no-repeat min-h-screen flex flex-col"
+                style={{ backgroundImage: "url('/back1.jpg')" }}
             >
-                <motion.h2 className="text-2xl font-semibold mb-6 text-blue-700">Find Calm & Support</motion.h2>
-
-                <div className="mb-6">
-                    <label htmlFor="feeling" className="block text-gray-700 text-sm font-bold mb-2">
-                        How are you feeling right now?
-                    </label>
-                    <motion.select
-                        id="feeling"
-                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        value={currentFeeling}
-                        onChange={handleFeelingChange}
-                    >
-                        <option value="">Select a feeling</option>
-                        {feelingKeywords.map((keyword) => (
-                            <option key={keyword} value={keyword} className="py-2">
-                                {keyword.charAt(0).toUpperCase() + keyword.slice(1)}
-                            </option>
-                        ))}
-                    </motion.select>
-                </div>
-
-                <div className="mb-6">
-                    <label htmlFor="time" className="block text-gray-700 text-sm font-bold mb-2">
-                        How much time do you have?
-                    </label>
-                    <motion.select
-                        id="time"
-                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        value={availableTime}
-                        onChange={handleTimeChange}
-                        disabled={!currentFeeling}
-                    >
-                        {timeOptions.map((option) => (
-                            <option key={option.value} value={option.value} className="py-2" disabled={option.value === '' && currentFeeling}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </motion.select>
-                    {!currentFeeling && (
-                        <p className="text-gray-500 text-xs italic mt-1">Please select a feeling first.</p>
-                    )}
-                </div>
-
-                <motion.button
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:shadow-outline"
-                    type="button"
-                    onClick={handleFindSkills}
-                    variants={buttonVariants}
-                    whileHover="hover"
-                    whileTap="tap"
-                    disabled={!currentFeeling || !availableTime}
+                <NavBar />
+                <motion.div
+                    className="bg-black/70 p-8 rounded-xl shadow-lg flex justify-center flex-col items-center w-full flex-grow overflow-auto pt-28 px-20"
+                    variants={containerVariants}
+                    initial="initial"
+                    animate="animate"
                 >
-                    Find Suggestions
-                </motion.button>
+                    <div className='backdrop-blur-lg bg-white/30 p-8 rounded-lg shadow-lg w-full'>
+                        <motion.h2 className="text-5xl font-semibold mb-6 text-blue-700 text-center">Find Calm & Support</motion.h2>
 
-                <AnimatePresence>
-                    {suggestions.length > 0 && (
-                        <motion.div
-                            className="mt-8"
-                            variants={suggestionVariants}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                        >
-                            <h3 className="text-xl font-semibold mb-4 text-gray-800">Here are some ideas:</h3>
-                            <motion.ul className="space-y-4">
-                                {suggestions.map((skill) => (
-                                    <motion.li
-                                        key={skill.id}
-                                        className="border rounded-lg p-5 shadow-sm"
-                                        variants={skillItemVariants}
-                                    >
-                                        <h4 className="font-semibold text-lg text-indigo-700 mb-2">{skill.name}</h4>
-                                        <p className="text-gray-700 text-sm mb-3">{skill.description}</p>
-                                        {skill.steps && skill.steps.length > 0 && (
-                                            <div className="mt-2">
-                                                <p className="text-gray-600 text-xs italic mb-1">Steps:</p>
-                                                <ol className="list-decimal list-inside text-gray-600 text-sm">
-                                                    {skill.steps.map((step, index) => (
-                                                        <li key={index} className="mb-1">{step}</li>
-                                                    ))}
-                                                </ol>
-                                            </div>
-                                        )}
-                                        <p className="text-gray-500 text-xs mt-2">
-                                            Time: <span className="font-medium">{skill.timeRequired}</span>
-                                        </p>
-                                    </motion.li>
+                        <div className="mb-6">
+                            <label htmlFor="feeling" className="block text-black text-sm font-bold mb-2">
+                                How are you feeling right now?
+                            </label>
+                            <motion.select
+                                id="feeling"
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                value={currentFeeling}
+                                onChange={handleFeelingChange}
+                            >
+                                <option value="">Select a feeling</option>
+                                {feelingKeywords.map((keyword) => (
+                                    <option key={keyword} value={keyword} className="py-2">
+                                        {keyword.charAt(0).toUpperCase() + keyword.slice(1)}
+                                    </option>
                                 ))}
-                            </motion.ul>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                            </motion.select>
+                        </div>
 
-                {suggestions.length === 0 && currentFeeling && availableTime && (
-                    <motion.p
-                        className="mt-6 text-gray-600 italic"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1, transition: { duration: 0.3 } }}
-                        exit={{ opacity: 0 }}
-                    >
-                        Hmm, couldn't find anything specific for that right now. Try another feeling or time frame.
-                    </motion.p>
-                )}
-            </motion.div>
+                        <div className="mb-6">
+                            <label htmlFor="time" className="block text-black text-sm font-bold mb-2">
+                                How much time do you have?
+                            </label>
+                            <motion.select
+                                id="time"
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                value={availableTime}
+                                onChange={handleTimeChange}
+                                disabled={!currentFeeling}
+                            >
+                                {timeOptions.map((option) => (
+                                    <option key={option.value} value={option.value} className="py-2" disabled={option.value === '' && currentFeeling}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </motion.select>
+                            {!currentFeeling && (
+                                <p className="text-black text-xs italic mt-1">Please select a feeling first.</p>
+                            )}
+                        </div>
+
+                        <motion.button
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:shadow-outline"
+                            type="button"
+                            onClick={handleFindSkills}
+                            variants={buttonVariants}
+                            whileHover="hover"
+                            whileTap="tap"
+                            disabled={!currentFeeling || !availableTime}
+                        >
+                            Find Suggestions
+                        </motion.button>
+
+                        <AnimatePresence>
+                            {suggestions.length > 0 && (
+                                <motion.div
+                                    className="mt-8 overflow-y-auto max-h-[50vh] pr-2"
+                                    variants={suggestionVariants}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                >
+                                    <h3 className="text-xl font-semibold mb-4 text-black">Here are some ideas:</h3>
+                                    <motion.ul className="space-y-4">
+                                        {suggestions.map((skill) => (
+                                            <motion.li
+                                                key={skill.id}
+                                                className="border rounded-lg p-5 shadow-sm"
+                                                variants={skillItemVariants}
+                                            >
+                                                <h4 className="font-semibold text-lg text-indigo-700 mb-2">{skill.name}</h4>
+                                                <p className="text-black text-sm mb-3">{skill.description}</p>
+                                                {skill.steps && skill.steps.length > 0 && (
+                                                    <div className="mt-2">
+                                                        <p className="text-black text-xs italic mb-1">Steps:</p>
+                                                        <ol className="list-decimal list-inside text-black text-sm">
+                                                            {skill.steps.map((step, index) => (
+                                                                <li key={index} className="mb-1">{step}</li>
+                                                            ))}
+                                                        </ol>
+                                                    </div>
+                                                )}
+                                                <p className="text-black text-xs mt-2">
+                                                    Time: <span className="font-medium">{skill.timeRequired}</span>
+                                                </p>
+                                            </motion.li>
+                                        ))}
+                                    </motion.ul>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+
+                        {suggestions.length === 0 && currentFeeling && availableTime && (
+                            <motion.p
+                                className="mt-6 text-gray-600 italic"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1, transition: { duration: 0.3 } }}
+                                exit={{ opacity: 0 }}
+                            >
+                                Hmm, couldn't find anything specific for that right now. Try another feeling or time frame.
+                            </motion.p>
+                        )}
+                    </div>
+                </motion.div>
+            </div>
         </>
     );
 };
