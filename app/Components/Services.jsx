@@ -5,7 +5,7 @@ const Services = () => {
         {
             id: 1,
             name: 'Binaural Beats',
-            subHead: 'Easy to Use and Navigate',
+            subHead: 'Tune Into Tranquility: Heal Your Mind with Sound',
             description: [
                 'Designed with a user-centric approach for seamless interaction.',
                 'Clear and straightforward navigation ensures a smooth experience.',
@@ -15,7 +15,7 @@ const Services = () => {
         {
             id: 2,
             name: 'Instant Mood Booster',
-            subHead: 'Works on All Your Devices',
+            subHead: 'Lift Your Spirits in Seconds!',
             description: [
                 'Fully responsive design adapts to desktops, tablets, and smartphones.',
                 'Consistent experience across different operating systems.',
@@ -25,7 +25,7 @@ const Services = () => {
         {
             id: 3,
             name: 'Emotion Wheel Journaling',
-            subHead: 'Fast and Reliable',
+            subHead: 'Explore Your Emotions, One Color at a Time',
             description: [
                 'Built with performance in mind for quick loading times.',
                 'Efficient code ensures smooth operation even under load.',
@@ -35,7 +35,7 @@ const Services = () => {
         {
             id: 4,
             name: 'Mental Health Awareness Questionnaire',
-            subHead: 'Your Data is Protected',
+            subHead: 'Understand Your Mind, One Answer at a Time',
             description: [
                 'Implementing industry-standard security measures.',
                 'Respecting user privacy with transparent data handling.',
@@ -45,7 +45,7 @@ const Services = () => {
         {
             id: 5,
             name: 'Coping Skill Matcher',
-            subHead: 'Tailor It to Your Needs',
+            subHead: '',
             description: [
                 'Offering a range of settings and configurations.',
                 'Adaptable features to match your specific requirements.',
@@ -101,7 +101,7 @@ const Services = () => {
                                                             index % 2 === 0 ? 'text-blue-400' : 'text-blue-500'
                                                         }`}
                                                     >
-                                                        •
+                                                        ♥
                                                     </span>
                                                     <span>{item}</span>
                                                 </li>
