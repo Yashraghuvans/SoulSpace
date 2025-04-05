@@ -7,7 +7,7 @@ const NavBar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <div className="rounded-full overflow-hidden">
-            <Image src="/favicon.ico" alt="Profile" width={100} height={100} />
+            <Image src="/favicon.ico" alt="Profile" width={80} height={80} />
           </div>
         </div>
         <nav className="flex space-x-7 gap-6">
