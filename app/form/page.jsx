@@ -129,9 +129,9 @@ const MentalHealthForm = () => {
         }
 
         if (calculatedMentalHealthScore >= 1 && calculatedMentalHealthScore <= 3) {
-            wellnessSolution = <p>It's important to prioritize your well-being. Consider starting with gentle activities like short walks and explore resources for managing low mood, such as mindfulness exercises or talking to a trusted friend or family member.</p>;
+            wellnessSolution = <p>It's important to prioritize your well-being.Repeat positive affirmations,play uplifting music.Spend time with nature.</p>;
         } else if (calculatedMentalHealthScore >= 4 && calculatedMentalHealthScore <= 6) {
-            wellnessSolution = <p>Focus on incorporating stress-reducing techniques into your daily life. Activities like listening to calming music, spending time in nature, or practicing deep breathing exercises could be beneficial.</p>;
+            wellnessSolution = <p>Focus on incorporating stress-reducing techniques into your daily life. Consider listening to binaural audio designed for mood support, spending time in nature, or practicing deep breathing exercises could be beneficial.</p>;
         } else if (calculatedMentalHealthScore >= 7 && calculatedMentalHealthScore <= 9) {
             wellnessSolution = <p>You're doing well! Continue to maintain a healthy lifestyle. Consider adding activities that bring you joy and help manage stress, such as hobbies, creative pursuits, or spending quality time with loved ones.</p>;
         } else if (calculatedMentalHealthScore === 10) {
