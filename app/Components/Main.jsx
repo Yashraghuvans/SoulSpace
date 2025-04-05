@@ -8,7 +8,7 @@ export default function Main() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main id="box" className="relative text-white min-h-screen flex flex-col justify-center items-center">
+      <main id="home" className="relative text-white min-h-screen flex flex-col justify-center items-center">
         <video
           autoPlay
           loop
