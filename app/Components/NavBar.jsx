@@ -24,7 +24,7 @@ const NavBar = () => {
             <Link href="#" legacyBehavior>
               <a className="text-white/90 hover:text-blue-500">Games</a>
             </Link>
-            <Link href="#" legacyBehavior>
+            <Link href="/form" legacyBehavior>
               <a className="text-white/90 hover:text-blue-500">Survey</a>
             </Link>
           </nav>
