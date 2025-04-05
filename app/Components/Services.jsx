@@ -7,9 +7,8 @@ const Services = () => {
             name: 'Binaural Beats',
             subHead: 'Tune Into Tranquility: Heal Your Mind with Sound',
             description: [
-                'Designed with a user-centric approach for seamless interaction.',
-                'Clear and straightforward navigation ensures a smooth experience.',
-                'Accessible design principles for all users.',
+                'By playing two slightly different frequencies in each ear, your brain perceives a third tone that can influence your mental state.',
+                'Creates a deeply immersive, therapeutic sound experience that promotes inner balance.',
             ],
         },
         {
@@ -17,9 +16,8 @@ const Services = () => {
             name: 'Instant Mood Booster',
             subHead: 'Lift Your Spirits in Seconds!',
             description: [
-                'Fully responsive design adapts to desktops, tablets, and smartphones.',
-                'Consistent experience across different operating systems.',
-                'Optimized for various screen sizes and resolutions.',
+                'Because sometimes, all it takes is a little nudge to feel a lot better.',
+                'Science-backed methods blended with feel-good activities to spark joy fast',
             ],
         },
         {
@@ -27,9 +25,8 @@ const Services = () => {
             name: 'Emotion Wheel Journaling',
             subHead: 'Explore Your Emotions, One Color at a Time',
             description: [
-                'Built with performance in mind for quick loading times.',
-                'Efficient code ensures smooth operation even under load.',
-                'Regular optimizations to maintain speed and reliability.',
+                'Emotion Wheel Journaling is a powerful technique that helps you identify, label, and process your emotions with clarity.',
+                'Helps bridge the gap between feeling and understanding—essential for emotional regulation and personal growth.',
             ],
         },
         {
@@ -37,19 +34,17 @@ const Services = () => {
             name: 'Mental Health Awareness Questionnaire',
             subHead: 'Understand Your Mind, One Answer at a Time',
             description: [
-                'Implementing industry-standard security measures.',
-                'Respecting user privacy with transparent data handling.',
-                'Regular security audits and updates.',
+                'A Mental Health Awareness Questionnaire is a self-assessment tool designed to help individuals reflect on their emotional, psychological, and behavioral well-being.',
+                'Aims to increase awareness about mental health by helping users identify early signs of stress, anxiety, depression, or burnout.',
             ],
         },
         {
             id: 5,
             name: 'Coping Skill Matcher',
-            subHead: '',
+            subHead: 'Struggling? Let’s Match You with What Helps',
             description: [
-                'Offering a range of settings and configurations.',
-                'Adaptable features to match your specific requirements.',
-                'Easy personalization to reflect your preferences.',
+                'The Coping Skill Matcher is an interactive tool that helps individuals find personalized strategies to manage stress, anxiety, and emotional challenges.',
+                'Offers a wide range of healthy coping mechanisms—like deep breathing, journaling, physical activity, grounding exercises, or creative expression.',
             ],
         },
     ];
