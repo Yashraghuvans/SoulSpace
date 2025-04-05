@@ -230,7 +230,7 @@ const MentalHealthForm = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.3 }}
-                        className="w-1/2 max-h-[90vh] bg-white rounded-lg shadow-xl overflow-y-auto p-6"
+                        className="w-1/2 max-h-[90vh] bg-white/50 rounded-lg shadow-xl overflow-y-auto p-6"
                     >
                         <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">Mental Wellness Check</h1>
                         {!showResults ? (
