@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import NavBar from '../Components/NavBar';
-import { ThumbsUp, ThumbsDown } from 'lucide-react'; // Import icons
+import { ThumbsUp, ThumbsDown } from 'lucide-react';
 
 const emotionWheel = {
     core: ['Happy', 'Sad', 'Angry', 'Fearful', 'Surprised', 'Disgusted'],
@@ -89,12 +90,35 @@ const EmotionWheelJournal = () => {
     return (
         <>
             <NavBar />
-            <div className="bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen py-8 pt-20 px-28">
-                <div className="container mx-auto p-6 bg-white/50 rounded-lg shadow-md">
-                    <h2 className="text-5xl font-semibold mb-4 text-blue-700 text-center">Emotion Wheel Journal</h2>
-                    <p className="text-black text-md mt-1 text-center mb-6">
+            <motion.div
+                className="min-h-screen py-8 pt-28 px-28 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: "url('/journal.jpg')" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+            >
+                <motion.div
+                    className="container mx-auto p-6 bg-white/60 rounded-xl shadow-md"
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <motion.h2
+                        className="text-5xl font-semibold mb-4 text-blue-700 text-center"
+                        initial={{ y: -50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.7 }}
+                    >
+                        Emotion Wheel Journal
+                    </motion.h2>
+                    <motion.p
+                        className="text-black text-md mt-1 text-center mb-6"
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.7 }}
+                    >
                         Tap into your emotional landscape. Select how you're feeling and use the space below to express your thoughts and experiences.
-                    </p>
+                    </motion.p>
                     <div className="mb-4">
                         <label htmlFor="core-emotion" className="block text-gray-700 text-sm font-bold mb-2">
                             How are you feeling primarily?
@@ -141,18 +165,31 @@ const EmotionWheelJournal = () => {
                             placeholder="Start writing here..."
                         ></textarea>
                     </div>
-                    <button
+                    <motion.button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         onClick={handleSaveEntry}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                     >
-                        Save Entry
-                    </button>
+                        Post Feeling
+                    </motion.button>
                     {journalEntries.length > 0 && (
-                        <div className="mt-8">
+                        <motion.div
+                            className="mt-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
                             <h3 className="text-lg font-semibold mb-4 text-gray-700">Past Entries:</h3>
                             <div className="space-y-4">
                                 {journalEntries.map((entry, index) => (
-                                    <div key={entry.id} className="bg-white rounded-lg shadow-sm border p-4">
+                                    <motion.div
+                                        key={entry.id}
+                                        className="bg-white rounded-lg shadow-sm border p-4"
+                                        initial={{ y: 20, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                                    >
                                         <div className="flex items-center mb-2">
                                             <div className="rounded-full bg-gray-300 h-8 w-8 flex items-center justify-center font-semibold text-gray-700">
                                                 {entry.emotion.charAt(0).toUpperCase()}
@@ -171,13 +208,13 @@ const EmotionWheelJournal = () => {
                                                 <ThumbsDown className="h-4 w-4 mr-1" /> {entry.downvotes}
                                             </button>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     )}
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </>
     );
 };
