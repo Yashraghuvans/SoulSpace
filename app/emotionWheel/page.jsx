@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import NavBar from '../Components/NavBar';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 const emotionWheel = {
     core: ['Happy', 'Sad', 'Angry', 'Fearful', 'Surprised', 'Disgusted'],
@@ -202,10 +202,10 @@ const EmotionWheelJournal = () => {
                                         <p className="text-gray-700 mb-2">{entry.text}</p>
                                         <div className="flex items-center space-x-4 text-gray-600 text-sm">
                                             <button onClick={() => handleUpvote(entry.id)} className="flex items-center hover:text-blue-500 focus:outline-none">
-                                                <ThumbsUp className="h-4 w-4 mr-1" /> {entry.upvotes}
+                                                <FaThumbsUp className="h-4 w-4 mr-1" /> {entry.upvotes}
                                             </button>
                                             <button onClick={() => handleDownvote(entry.id)} className="flex items-center hover:text-red-500 focus:outline-none">
-                                                <ThumbsDown className="h-4 w-4 mr-1" /> {entry.downvotes}
+                                                <FaThumbsDown className="h-4 w-4 mr-1" /> {entry.downvotes}
                                             </button>
                                         </div>
                                     </motion.div>
