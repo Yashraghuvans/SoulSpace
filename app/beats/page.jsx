@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import NavBar from '../Components/NavBar';
 
 const frequencyOptions = [
     { value: 200, label: '200 Hz (Default)' },
@@ -89,73 +90,78 @@ const BinauralBeatsPlayer = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 gap-12">
-            <div className='bg-white/70 flex justify-center items-center rounded-lg shadow-md px-3'>
-                <div>
-                    <Image
-                        src="/beats.gif"
-                        alt="Soul Space Logo"
-                        width={250}
-                        height={250}
-                        className="mb-4 rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500 "
-                    />
-                </div>
-                <div className="p-6 flex justify-center items-center flex-col">
-                    <h1 className="text-5xl font-semibold mb-4 text-gray-800">Binaural Harmony</h1>
-                    <h2 className="text-3xl font-semibold mb-4 text-gray-800">Tune Your Mind with Soul Space</h2>
-
-                    <div className="mb-4">
-                        <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-2">
-                            Base Frequency (Hz):
-                        </label>
-                        <select
-                            id="baseFrequency"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={baseFrequency}
-                            onChange={handleBaseFrequencyChange}
-                        >
-                            {frequencyOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
+        <>
+        <div>
+            <NavBar/>
+            <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 gap-12">
+                <div className='bg-white/70 flex justify-center items-center rounded-lg shadow-md px-3'>
+                    <div>
+                        <Image
+                            src="/beats.gif"
+                            alt="Soul Space Logo"
+                            width={250}
+                            height={250}
+                            className="mb-4 rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500 "
+                        />
                     </div>
+                    <div className="p-6 flex justify-center items-center flex-col">
+                        <h1 className="text-5xl font-semibold mb-4 text-gray-800">Binaural Harmony</h1>
+                        <h2 className="text-3xl font-semibold mb-4 text-gray-800">Tune Your Mind with Soul Space</h2>
 
-                    <div className="mb-4">
-                        <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-2">
-                            Frequency Difference (Hz):
-                        </label>
-                        <select
-                            id="frequencyDifference"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={frequencyDifference}
-                            onChange={handleFrequencyDifferenceChange}
+                        <div className="mb-4">
+                            <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-2">
+                                Base Frequency (Hz):
+                            </label>
+                            <select
+                                id="baseFrequency"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                value={baseFrequency}
+                                onChange={handleBaseFrequencyChange}
+                            >
+                                {frequencyOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="mb-4">
+                            <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-2">
+                                Frequency Difference (Hz):
+                            </label>
+                            <select
+                                id="frequencyDifference"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                value={frequencyDifference}
+                                onChange={handleFrequencyDifferenceChange}
+                            >
+                                {differenceOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <button
+                            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isPlaying ? 'bg-red-500 hover:bg-red-700' : ''
+                                }`}
+                            type="button"
+                            onClick={togglePlay}
+                            disabled={!audioContext}
                         >
-                            {differenceOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
+                            {isPlaying ? 'Stop' : 'Play'}
+                        </button>
+
+                        {audioContext && audioContext.state === 'suspended' && (
+                            <p className="mt-2 text-sm text-yellow-500">AudioContext is suspended. Please interact with the page to enable audio.</p>
+                        )}
                     </div>
-
-                    <button
-                        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isPlaying ? 'bg-red-500 hover:bg-red-700' : ''
-                            }`}
-                        type="button"
-                        onClick={togglePlay}
-                        disabled={!audioContext}
-                    >
-                        {isPlaying ? 'Stop' : 'Play'}
-                    </button>
-
-                    {audioContext && audioContext.state === 'suspended' && (
-                        <p className="mt-2 text-sm text-yellow-500">AudioContext is suspended. Please interact with the page to enable audio.</p>
-                    )}
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
