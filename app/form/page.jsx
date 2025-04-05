@@ -128,7 +128,6 @@ const MentalHealthForm = () => {
             setMentalAgeScore(null);
         }
 
-        // Determine solutions based on Overall Mental Wellness Score
         if (calculatedMentalHealthScore >= 1 && calculatedMentalHealthScore <= 3) {
             wellnessSolution = <p>It's important to prioritize your well-being. Consider starting with gentle activities like short walks and explore resources for managing low mood, such as mindfulness exercises or talking to a trusted friend or family member.</p>;
         } else if (calculatedMentalHealthScore >= 4 && calculatedMentalHealthScore <= 6) {
@@ -221,7 +220,7 @@ const MentalHealthForm = () => {
     );
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/background-image.jpg')" }}>
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/back3.jpg')" }}>
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
