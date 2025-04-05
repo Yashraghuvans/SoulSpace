@@ -6,7 +6,7 @@ import Services from './Components/Services'
 const page = () => {
   return (
     <>
-      <div className='bg-black/70'>
+      <div className='bg-black/70' id='home'>
         <NavBar />
         <div className='h-full'>
           <Main />
