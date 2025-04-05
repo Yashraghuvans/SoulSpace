@@ -4,7 +4,7 @@ import Link from 'next/link';
 const NavBar = () => {
   return (
     <>
-      <header className=" backdrop-blur-sm py-2 fixed w-full z-[90]">
+      <header className=" backdrop-blur-sm py-2 fixed w-full z-[90] font-semibold text-xl">
         <div className="container mx-auto flex justify-between items-center px-6">
           <div className="flex items-center">
             <div className="rounded-full overflow-hidden">
