@@ -13,19 +13,19 @@ const NavBar = () => {
           </div>
           <nav className="flex space-x-7 gap-6">
             <Link href="#" legacyBehavior>
-              <a className="text-white/90">Home</a>
+              <a className="text-white/90 hover:text-blue-500">Home</a>
             </Link>
             <Link href="#" legacyBehavior>
-              <a className="text-white/90">About Us</a>
+              <a className="text-white/90 hover:text-blue-500">About Us</a>
             </Link>
             <Link href="#" legacyBehavior>
-              <a className="text-white/90">Services</a>
+              <a className="text-white/90 hover:text-blue-500">Services</a>
             </Link>
             <Link href="#" legacyBehavior>
-              <a className="text-white/90">Games</a>
+              <a className="text-white/90 hover:text-blue-500">Games</a>
             </Link>
             <Link href="#" legacyBehavior>
-              <a className="text-white/90">Survey</a>
+              <a className="text-white/90 hover:text-blue-500">Survey</a>
             </Link>
           </nav>
         </div>
