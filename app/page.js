@@ -5,7 +5,7 @@ import Main from './Components/Main'
 const page = () => {
   return (
     <>
-      <div>
+      <div className='bg-black/70'>
         <NavBar/>
         <Main/>
       </div>
