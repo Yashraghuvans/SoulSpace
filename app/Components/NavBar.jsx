@@ -18,7 +18,6 @@ const NavBar = () => {
             <Link href="/beats" legacyBehavior>
               <a className="text-white/90 hover:text-blue-500">Beats</a>
             </Link>
-
             <Link href="/copup" legacyBehavior>
               <a className="text-white/90 hover:text-blue-500">Coping</a>
             </Link>
