@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import NavBar from '../Components/NavBar';
 
 const frequencyOptions = [
@@ -91,76 +92,106 @@ const BinauralBeatsPlayer = () => {
 
     return (
         <>
-        <div>
-            <NavBar/>
-            <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 gap-12">
-                <div className='bg-white/70 flex justify-center items-center rounded-lg shadow-md px-3'>
-                    <div>
-                        <Image
-                            src="/beats.gif"
-                            alt="Soul Space Logo"
-                            width={250}
-                            height={250}
-                            className="mb-4 rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500 "
-                        />
-                    </div>
-                    <div className="p-6 flex justify-center items-center flex-col">
-                        <h1 className="text-5xl font-semibold mb-4 text-gray-800">Binaural Harmony</h1>
-                        <h2 className="text-3xl font-semibold mb-4 text-gray-800">Tune Your Mind with Soul Space</h2>
-
-                        <div className="mb-4">
-                            <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-2">
-                                Base Frequency (Hz):
-                            </label>
-                            <select
-                                id="baseFrequency"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                value={baseFrequency}
-                                onChange={handleBaseFrequencyChange}
-                            >
-                                {frequencyOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div className="mb-4">
-                            <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-2">
-                                Frequency Difference (Hz):
-                            </label>
-                            <select
-                                id="frequencyDifference"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                value={frequencyDifference}
-                                onChange={handleFrequencyDifferenceChange}
-                            >
-                                {differenceOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <button
-                            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isPlaying ? 'bg-red-500 hover:bg-red-700' : ''
-                                }`}
-                            type="button"
-                            onClick={togglePlay}
-                            disabled={!audioContext}
+            <div>
+                <NavBar />
+                <motion.div
+                    className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 gap-12"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                >
+                    <motion.div
+                        className="bg-white/70 flex justify-center items-center rounded-lg shadow-md px-3"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <motion.div
+                            initial={{ rotate: 0 }}
+                            animate={{ rotate: isPlaying ? 360 : 0 }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                         >
-                            {isPlaying ? 'Stop' : 'Play'}
-                        </button>
+                            <Image
+                                src="/beats.gif"
+                                alt="Soul Space Logo"
+                                width={250}
+                                height={250}
+                                className="mb-4 rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500"
+                            />
+                        </motion.div>
+                        <div className="p-6 flex justify-center items-center flex-col">
+                            <motion.h1
+                                className="text-5xl font-semibold mb-4 text-gray-800"
+                                initial={{ y: -50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.5 }}
+                            >
+                                Binaural Harmony
+                            </motion.h1>
+                            <motion.h2
+                                className="text-3xl font-semibold mb-4 text-gray-800"
+                                initial={{ y: -50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.7 }}
+                            >
+                                Tune Your Mind with Soul Space
+                            </motion.h2>
 
-                        {audioContext && audioContext.state === 'suspended' && (
-                            <p className="mt-2 text-sm text-yellow-500">AudioContext is suspended. Please interact with the page to enable audio.</p>
-                        )}
-                    </div>
-                </div>
+                            <div className="mb-4">
+                                <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-2">
+                                    Base Frequency (Hz):
+                                </label>
+                                <select
+                                    id="baseFrequency"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    value={baseFrequency}
+                                    onChange={handleBaseFrequencyChange}
+                                >
+                                    {frequencyOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="mb-4">
+                                <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-2">
+                                    Frequency Difference (Hz):
+                                </label>
+                                <select
+                                    id="frequencyDifference"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    value={frequencyDifference}
+                                    onChange={handleFrequencyDifferenceChange}
+                                >
+                                    {differenceOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <motion.button
+                                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isPlaying ? 'bg-red-500 hover:bg-red-700' : ''
+                                    }`}
+                                type="button"
+                                onClick={togglePlay}
+                                disabled={!audioContext}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                            >
+                                {isPlaying ? 'Stop' : 'Play'}
+                            </motion.button>
+
+                            {audioContext && audioContext.state === 'suspended' && (
+                                <p className="mt-2 text-sm text-yellow-500">AudioContext is suspended. Please interact with the page to enable audio.</p>
+                            )}
+                        </div>
+                    </motion.div>
+                </motion.div>
             </div>
-        </div>
         </>
     );
 };
