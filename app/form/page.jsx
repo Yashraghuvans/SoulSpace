@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import NavBar from '../Components/NavBar';
 
 const MentalHealthForm = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -220,62 +221,67 @@ const MentalHealthForm = () => {
     );
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/back3.jpg')" }}>
-            <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="w-1/2 max-h-[90vh] bg-white rounded-lg shadow-xl overflow-y-auto p-6"
-            >
-                <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">Mental Wellness Check</h1>
-                {!showResults ? (
+        <>
+            <div>
+                <NavBar/>
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/back3.jpg')" }}>
                     <motion.div
-                        key={currentQuestion}
-                        className="relative"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-1/2 max-h-[90vh] bg-white rounded-lg shadow-xl overflow-y-auto p-6"
                     >
-                        {renderQuestion()}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="flex justify-between"
-                        >
-                            {currentQuestion > 0 && (
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={prevQuestion}
-                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                        <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">Mental Wellness Check</h1>
+                        {!showResults ? (
+                            <motion.div
+                                key={currentQuestion}
+                                className="relative"
+                            >
+                                {renderQuestion()}
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="flex justify-between"
                                 >
-                                    Previous
-                                </motion.button>
-                            )}
-                            {currentQuestion < questions.length - 1 ? (
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={nextQuestion}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                >
-                                    Next
-                                </motion.button>
-                            ) : (
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={handleSubmit}
-                                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                                >
-                                    Get Scores
-                                </motion.button>
-                            )}
-                        </motion.div>
+                                    {currentQuestion > 0 && (
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={prevQuestion}
+                                            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                                        >
+                                            Previous
+                                        </motion.button>
+                                    )}
+                                    {currentQuestion < questions.length - 1 ? (
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={nextQuestion}
+                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Next
+                                        </motion.button>
+                                    ) : (
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={handleSubmit}
+                                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Get Scores
+                                        </motion.button>
+                                    )}
+                                </motion.div>
+                            </motion.div>
+                        ) : (
+                            renderResults()
+                        )}
                     </motion.div>
-                ) : (
-                    renderResults()
-                )}
-            </motion.div>
-        </div>
+                </div>
+            </div>
+        </>
     );
 };
 
