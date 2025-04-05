@@ -1,31 +1,49 @@
-import Image from 'next/image';
-import React from 'react';
+import Head from 'next/head';
 
-const Main = () => {
+export default function Main() {
   return (
-    <>
-      <div
-        className="w-full h-screen bg-cover bg-center relative"
-        style={{ backgroundImage: "url('/back1.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black/80 flex justify-around items-center">
-          <div className='flex flex-col items-center justify-center text-white/90'>
-            <h1 className='text-7xl font-bold py-7'>Soul Space</h1>
-            <h2 className='text-2xl px-5'>We aim to build a user-friendly web platform leveraging React and Next.js that offers a range of features to provide immediate mood support, increase mental health awareness, and introduce basic coping skills. While initially location-agnostic, the platform is designed with the potential for future integration of localized resources </h2>
+    <div>
+      <Head>
+        <title>Soul Space</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">
+            Welcome to Soul Space.
+          </h1>
+          <h2 className="text-5xl font-extrabold mb-8">
+            Your Pocket Companion for <span className="text-blue-500">Mental Well-being</span>
+          </h2>
+          <p className="text-lg mb-8">
+            Stressed? Find calm here. Simple tools for your well-being. Breathe, reflect, and center yourself. Your journey to peace starts now.
+
+          </p>
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">
+            Explore More
+          </button>
+        </div>
+
+        <div className="flex justify-center mt-16 space-x-12">
+          <div className="text-center">
+            <p className="text-4xl font-bold">10K+</p>
+            <p className="text-lg">Active Users</p>
           </div>
-          <div>
-            <Image
-              src="/front.png"
-              alt="Logo"
-              width={2000}
-              height={1200}
-              className="shadow-lg"
-            />
+          <div className="text-center">
+            <p className="text-4xl font-bold">5+</p>
+            <p className="text-lg">Interactive Games</p>
+          </div>
+          <div className="text-center">
+            <p className="text-4xl font-bold">95%</p>
+            <p className="text-lg">Happy Users</p>
           </div>
         </div>
-      </div>
-    </>
-  );
-};
 
-export default Main;
+        <button className="fixed bottom-8 left-8 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full">
+          Emergency Help
+        </button>
+      </main>
+    </div>
+  );
+}
