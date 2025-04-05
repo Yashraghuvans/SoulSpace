@@ -93,9 +93,17 @@ const BinauralBeatsPlayer = () => {
     return (
         <>
             <div>
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    className="absolute top-0 left-0 w-full object-cover -z-10"
+                >
+                    <source src="/beats_b.mp4" type="video/mp4" />
+                </video>
                 <NavBar />
                 <motion.div
-                    className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 gap-12"
+                    className="flex justify-center items-center min-h-screen bg-black/50 gap-12"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
