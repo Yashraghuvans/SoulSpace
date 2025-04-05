@@ -21,8 +21,8 @@ const NavBar = () => {
             <Link href="/copup" legacyBehavior>
               <a className="text-white/90 hover:text-blue-500">Coping</a>
             </Link>
-            <Link href="#" legacyBehavior>
-              <a className="text-white/90 hover:text-blue-500">Games</a>
+            <Link href="/emotionWheel" legacyBehavior>
+              <a className="text-white/90 hover:text-blue-500">Journal</a>
             </Link>
             <Link href="/form" legacyBehavior>
               <a className="text-white/90 hover:text-blue-500">Survey</a>
