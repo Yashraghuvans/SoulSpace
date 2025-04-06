@@ -37,27 +37,27 @@ const NavBar = () => {
       style={{ top: 0 }}
       animate={controls}
     >
-      <div className="container mx-auto flex justify-between items-center px-6">
+      <div className="container mx-auto flex justify-between items-center px-6 sm:px-12 md:px-16 lg:px-24">
         <div className="flex items-center">
-          <div className="rounded-full overflow-hidden">
-            <Image src="/favicon.ico" alt="Profile" width={70} height={70} />
+          <div className="rounded-full overflow-hidden w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20">
+            <Image src="/favicon.ico" alt="Profile" width={80} height={80} className="object-cover" />
           </div>
         </div>
-        <nav className="flex space-x-7 gap-6">
+        <nav className="flex space-x-4 sm:space-x-6 md:space-x-7 lg:space-x-7 gap-2 sm:gap-4 md:gap-6">
           <Link href="/" legacyBehavior>
-            <a className="text-white/90 hover:text-blue-500">Home</a>
+            <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Home</a>
           </Link>
           <Link href="/beats" legacyBehavior>
-            <a className="text-white/90 hover:text-blue-500">Beats</a>
+            <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Beats</a>
           </Link>
           <Link href="/copup" legacyBehavior>
-            <a className="text-white/90 hover:text-blue-500">Support Tool</a>
+            <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Support Tool</a>
           </Link>
           <Link href="/emotionWheel" legacyBehavior>
-            <a className="text-white/90 hover:text-blue-500">Journal</a>
+            <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Journal</a>
           </Link>
           <Link href="/form" legacyBehavior>
-            <a className="text-white/90 hover:text-blue-500">Survey</a>
+            <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Survey</a>
           </Link>
         </nav>
       </div>
