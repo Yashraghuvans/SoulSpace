@@ -25,27 +25,27 @@ export default function Main() {
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 sm:mb-8 leading-tight">
             Your Pocket Companion for <span className="text-blue-500">Mental Well-being</span>
           </h2>
-          <p  className="text-lg mb-4 sm:mb-8 text-center">
+          <p className="text-lg mb-4 sm:mb-8 text-center">
             Stressed? Find calm here. Simple tools for your well-being. Breathe, reflect, and center yourself. Your journey to peace starts now.
           </p>
-          <Link href="/form">
+          <a href="#box">
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">
               Explore More
             </button>
-          </Link>
+          </a>
         </div>
 
         <div className="flex justify-center mt-8 sm:mt-12 md:mt-16 space-x-6 sm:space-x-12 relative z-10">
           <div className="text-center">
-            <p className="text-3xl sm:text-4xl font-bold">10K+</p>
+            <p className="text-3xl sm:text-4xl font-bold">15K+</p>
             <p className="text-sm sm:text-lg">Active Users</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl sm:text-4xl font-bold">5+</p>
-            <p className="text-sm sm:text-lg">Interactive Games</p>
+            <p className="text-3xl sm:text-4xl font-bold">4+</p>
+            <p className="text-sm sm:text-lg">Support Tools</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl sm:text-4xl font-bold">95%</p>
+            <p className="text-3xl sm:text-4xl font-bold">90%</p>
             <p className="text-sm sm:text-lg">Happy Users</p>
           </div>
         </div>
