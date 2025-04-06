@@ -41,6 +41,7 @@ const Footer = () => {
                             </button>
                         </form>
                     </div>
+                    <hr className="w-full max-w-md border-t border-gray-300 my-4" />
                     <p className="text-gray-500 text-xs">
                         &copy; {new Date().getFullYear()} All Rights Reserved.
                     </p>
