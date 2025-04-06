@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from './Components/NavBar'
 import Main from './Components/Main'
 import Services from './Components/Services'
+import Card from './Components/Cards'
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
         <div className='h-full'>
           <Main />
         </div>
+        <Card />
         <Services/>
       </div>
     </>
