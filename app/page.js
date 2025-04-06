@@ -3,6 +3,7 @@ import NavBar from './Components/NavBar'
 import Main from './Components/Main'
 import Services from './Components/Services'
 import Card from './Components/Cards'
+import Footer from './Components/footer'
 
 const page = () => {
   return (
@@ -14,6 +15,7 @@ const page = () => {
         </div>
         <Card />
         <Services/>
+        <Footer/>
       </div>
     </>
   )
