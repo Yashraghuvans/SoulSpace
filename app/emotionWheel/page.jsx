@@ -91,20 +91,20 @@ const EmotionWheelJournal = () => {
         <>
             <NavBar />
             <motion.div
-                className="min-h-screen py-8 pt-28 px-28 bg-cover bg-center bg-no-repeat"
+                className="min-h-screen py-8 pt-20 sm:pt-24 md:pt-28 px-4 sm:px-6 md:px-8 lg:px-28 bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: "url('/journal.jpg')" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
             >
                 <motion.div
-                    className="container mx-auto p-6 bg-white/60 rounded-xl shadow-md"
+                    className="container mx-auto p-4 sm:p-6 bg-white/60 rounded-xl shadow-md"
                     initial={{ scale: 0.8 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.5 }}
                 >
                     <motion.h2
-                        className="text-5xl font-semibold mb-4 text-blue-700 text-center"
+                        className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-3 sm:mb-4 text-blue-700 text-center"
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.7 }}
@@ -112,15 +112,15 @@ const EmotionWheelJournal = () => {
                         Emotion Wheel Journal
                     </motion.h2>
                     <motion.p
-                        className="text-black text-md mt-1 text-center mb-6"
+                        className="text-black text-md mt-1 text-center mb-4 sm:mb-6"
                         initial={{ y: 50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.7 }}
                     >
                         Tap into your emotional landscape. Select how you're feeling and use the space below to express your thoughts and experiences.
                     </motion.p>
-                    <div className="mb-4">
-                        <label htmlFor="core-emotion" className="block text-gray-700 text-sm font-bold mb-2">
+                    <div className="mb-3 sm:mb-4">
+                        <label htmlFor="core-emotion" className="block text-gray-700 text-sm font-bold mb-1 sm:mb-2">
                             How are you feeling primarily?
                         </label>
                         <select
@@ -136,8 +136,8 @@ const EmotionWheelJournal = () => {
                         </select>
                     </div>
                     {selectedCoreEmotion && (
-                        <div className="mb-4">
-                            <label htmlFor="secondary-emotion" className="block text-gray-700 text-sm font-bold mb-2">
+                        <div className="mb-3 sm:mb-4">
+                            <label htmlFor="secondary-emotion" className="block text-gray-700 text-sm font-bold mb-1 sm:mb-2">
                                 More specifically?
                             </label>
                             <select
@@ -154,53 +154,53 @@ const EmotionWheelJournal = () => {
                         </div>
                     )}
                     <div className="mb-4">
-                        <label htmlFor="journal-entry" className="block text-gray-700 text-sm font-bold mb-2">
+                        <label htmlFor="journal-entry" className="block text-gray-700 text-sm font-bold mb-1 sm:mb-2">
                             Your Journal Entry:
                         </label>
                         <textarea
                             id="journal-entry"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-48 resize-vertical"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 sm:h-40 md:h-48 resize-vertical"
                             value={journalEntry}
                             onChange={handleJournalEntryChange}
                             placeholder="Start writing here..."
                         ></textarea>
                     </div>
                     <motion.button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto"
                         onClick={handleSaveEntry}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         Post Feeling
                     </motion.button>
                     {journalEntries.length > 0 && (
                         <motion.div
-                            className="mt-8"
+                            className="mt-6 sm:mt-8"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-lg font-semibold mb-4 text-gray-700">Past Entries:</h3>
-                            <div className="space-y-4">
+                            <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-700">Past Entries:</h3>
+                            <div className="space-y-3 sm:space-y-4">
                                 {journalEntries.map((entry, index) => (
                                     <motion.div
                                         key={entry.id}
-                                        className="bg-white rounded-lg shadow-sm border p-4"
+                                        className="bg-white rounded-lg shadow-sm border p-3 sm:p-4"
                                         initial={{ y: 20, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
-                                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                                        transition={{ duration: 0.3, delay: index * 0.05 }}
                                     >
                                         <div className="flex items-center mb-2">
-                                            <div className="rounded-full bg-gray-300 h-8 w-8 flex items-center justify-center font-semibold text-gray-700">
+                                            <div className="rounded-full bg-gray-300 h-6 w-6 sm:h-8 sm:w-8 flex items-center justify-center font-semibold text-gray-700 text-sm sm:text-base">
                                                 {entry.emotion.charAt(0).toUpperCase()}
                                             </div>
-                                            <div className="ml-3">
-                                                <p className="font-semibold text-gray-800">{entry.topic}</p>
-                                                <p className="text-gray-500 text-sm">{entry.emotion} - {entry.timestamp}</p>
+                                            <div className="ml-2 sm:ml-3">
+                                                <p className="font-semibold text-gray-800 text-sm sm:text-base">{entry.topic}</p>
+                                                <p className="text-gray-500 text-xs sm:text-sm">{entry.emotion} - {entry.timestamp}</p>
                                             </div>
                                         </div>
-                                        <p className="text-gray-700 mb-2">{entry.text}</p>
-                                        <div className="flex items-center space-x-4 text-gray-600 text-sm">
+                                        <p className="text-gray-700 mb-2 text-sm sm:text-base">{entry.text}</p>
+                                        <div className="flex items-center space-x-3 sm:space-x-4 text-gray-600 text-xs sm:text-sm">
                                             <button onClick={() => handleUpvote(entry.id)} className="flex items-center hover:text-blue-500 focus:outline-none">
                                                 <FaThumbsUp className="h-4 w-4 mr-1" /> {entry.upvotes}
                                             </button>
