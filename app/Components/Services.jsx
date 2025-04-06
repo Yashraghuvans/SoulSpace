@@ -55,7 +55,7 @@ const Services = () => {
             className="bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/back2.jpg')" }}
         >
-            <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/50 relative" id="features">
+            <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/70 relative" id="features">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-white/80">
                         <span className="text-blue-600 text-4xl sm:text-6xl">F</span>eatures
