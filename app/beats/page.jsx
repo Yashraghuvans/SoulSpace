@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -103,18 +103,19 @@ const BinauralBeatsPlayer = () => {
                 </video>
                 <NavBar />
                 <motion.div
-                    className="flex justify-center items-center min-h-screen bg-black/50 gap-12"
+                    className="flex justify-center items-center min-h-screen bg-black/50 gap-12 px-4 sm:px-6 md:px-8 lg:px-12"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                 >
                     <motion.div
-                        className="bg-white/70 flex justify-center items-center rounded-lg shadow-md px-3"
+                        className="bg-white/70 flex flex-col md:flex-row justify-center items-center rounded-lg shadow-md p-6 md:p-8 lg:p-3"
                         initial={{ scale: 0.8 }}
                         animate={{ scale: 1 }}
                         transition={{ duration: 0.5 }}
                     >
                         <motion.div
+                            className="mb-4 md:mb-0 md:mr-8 lg:mr-3"
                             initial={{ rotate: 0 }}
                             animate={{ rotate: isPlaying ? 360 : 0 }}
                             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -122,14 +123,14 @@ const BinauralBeatsPlayer = () => {
                             <Image
                                 src="/beats.gif"
                                 alt="Soul Space Logo"
-                                width={250}
-                                height={250}
-                                className="mb-4 rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500"
+                                width={200}
+                                height={200}
+                                className="rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500"
                             />
                         </motion.div>
-                        <div className="p-6 flex justify-center items-center flex-col">
+                        <div className="flex justify-center items-center flex-col text-center md:text-left">
                             <motion.h1
-                                className="text-5xl font-semibold mb-4 text-gray-800"
+                                className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-2 md:mb-4 text-gray-800"
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.5 }}
@@ -137,7 +138,7 @@ const BinauralBeatsPlayer = () => {
                                 Binaural Harmony
                             </motion.h1>
                             <motion.h2
-                                className="text-3xl font-semibold mb-4 text-gray-800"
+                                className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-800"
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.7 }}
@@ -145,8 +146,8 @@ const BinauralBeatsPlayer = () => {
                                 Tune Your Mind with Soul Space
                             </motion.h2>
 
-                            <div className="mb-4">
-                                <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-2">
+                            <div className="mb-2 md:mb-4 w-full md:w-auto">
+                                <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
                                     Base Frequency (Hz):
                                 </label>
                                 <select
@@ -163,8 +164,8 @@ const BinauralBeatsPlayer = () => {
                                 </select>
                             </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-2">
+                            <div className="mb-4 w-full md:w-auto">
+                                <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
                                     Frequency Difference (Hz):
                                 </label>
                                 <select
