@@ -189,21 +189,21 @@ const CopingSkillMatcher = () => {
             >
                 <NavBar />
                 <motion.div
-                    className="bg-black/70 p-8 rounded-xl shadow-lg flex justify-center flex-col items-center w-full flex-grow overflow-auto pt-28 px-20"
+                    className="bg-black/70 p-6 sm:p-8 rounded-xl shadow-lg flex justify-center flex-col items-center w-full flex-grow overflow-auto pt-20 sm:pt-28 px-4 sm:px-8 md:px-16 lg:px-20"
                     variants={containerVariants}
                     initial="initial"
                     animate="animate"
                 >
-                    <div className='backdrop-blur-lg bg-white/30 p-8 rounded-lg shadow-lg w-full'>
-                        <motion.h2 className="text-5xl font-semibold mb-6 text-blue-700 text-center">Find Calm & Support</motion.h2>
+                    <div className='backdrop-blur-lg bg-white/30 p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-lg'>
+                        <motion.h2 className="text-3xl sm:text-4xl font-semibold mb-4 sm:mb-6 text-blue-700 text-center">Find Calm & Support</motion.h2>
 
-                        <div className="mb-6">
+                        <div className="mb-4 sm:mb-6">
                             <label htmlFor="feeling" className="block text-black text-sm font-bold mb-2">
                                 How are you feeling right now?
                             </label>
                             <motion.select
                                 id="feeling"
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 sm:py-3 px-3 sm:px-4 text-black leading-tight focus:outline-none focus:shadow-outline"
                                 value={currentFeeling}
                                 onChange={handleFeelingChange}
                             >
@@ -216,13 +216,13 @@ const CopingSkillMatcher = () => {
                             </motion.select>
                         </div>
 
-                        <div className="mb-6">
+                        <div className="mb-4 sm:mb-6">
                             <label htmlFor="time" className="block text-black text-sm font-bold mb-2">
                                 How much time do you have?
                             </label>
                             <motion.select
                                 id="time"
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 sm:py-3 px-3 sm:px-4 text-black leading-tight focus:outline-none focus:shadow-outline"
                                 value={availableTime}
                                 onChange={handleTimeChange}
                                 disabled={!currentFeeling}
@@ -239,7 +239,7 @@ const CopingSkillMatcher = () => {
                         </div>
 
                         <motion.button
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:shadow-outline"
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-md focus:outline-none focus:shadow-outline w-full"
                             type="button"
                             onClick={handleFindSkills}
                             variants={buttonVariants}
@@ -253,33 +253,33 @@ const CopingSkillMatcher = () => {
                         <AnimatePresence>
                             {suggestions.length > 0 && (
                                 <motion.div
-                                    className="mt-8 overflow-y-auto max-h-[50vh] pr-2"
+                                    className="mt-6 sm:mt-8 overflow-y-auto max-h-[60vh] pr-2"
                                     variants={suggestionVariants}
                                     initial="initial"
                                     animate="animate"
                                     exit="exit"
                                 >
-                                    <h3 className="text-xl font-semibold mb-4 text-black">Here are some ideas:</h3>
-                                    <motion.ul className="space-y-4">
+                                    <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-black">Here are some ideas:</h3>
+                                    <motion.ul className="space-y-3 sm:space-y-4">
                                         {suggestions.map((skill) => (
                                             <motion.li
                                                 key={skill.id}
-                                                className="border rounded-lg p-5 shadow-sm"
+                                                className="border rounded-lg p-3 sm:p-4 shadow-sm"
                                                 variants={skillItemVariants}
                                             >
-                                                <h4 className="font-semibold text-lg text-indigo-700 mb-2">{skill.name}</h4>
-                                                <p className="text-black text-sm mb-3">{skill.description}</p>
+                                                <h4 className="font-semibold text-md sm:text-lg text-indigo-700 mb-1 sm:mb-2">{skill.name}</h4>
+                                                <p className="text-black text-xs sm:text-sm mb-2 sm:mb-3">{skill.description}</p>
                                                 {skill.steps && skill.steps.length > 0 && (
-                                                    <div className="mt-2">
+                                                    <div className="mt-1 sm:mt-2">
                                                         <p className="text-black text-xs italic mb-1">Steps:</p>
-                                                        <ol className="list-decimal list-inside text-black text-sm">
+                                                        <ol className="list-decimal list-inside text-black text-xs sm:text-sm">
                                                             {skill.steps.map((step, index) => (
                                                                 <li key={index} className="mb-1">{step}</li>
                                                             ))}
                                                         </ol>
                                                     </div>
                                                 )}
-                                                <p className="text-black text-xs mt-2">
+                                                <p className="text-black text-xs mt-1 sm:mt-2">
                                                     Time: <span className="font-medium">{skill.timeRequired}</span>
                                                 </p>
                                             </motion.li>
@@ -291,7 +291,7 @@ const CopingSkillMatcher = () => {
 
                         {suggestions.length === 0 && currentFeeling && availableTime && (
                             <motion.p
-                                className="mt-6 text-gray-600 italic"
+                                className="mt-4 sm:mt-6 text-gray-600 italic text-sm"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1, transition: { duration: 0.3 } }}
                                 exit={{ opacity: 0 }}
