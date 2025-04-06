@@ -9,23 +9,23 @@ export default function Main() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main id="home" className="relative text-white min-h-screen flex flex-col justify-center items-center">
+      <main id="home" className="relative text-white min-h-screen flex flex-col justify-center items-center px-6 sm:px-12 md:px-24 lg:px-0">
         <video
           autoPlay
           loop
           muted
-          className="absolute top-0 left-0 w-full object-cover -z-10"
+          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
         >
           <source src="/anim.mp4" type="video/mp4" />
         </video>
-        <div className="text-center relative z-10">
-          <h1 className="text-4xl font-bold mb-4">
+        <div className="text-center relative z-10 py-8 md:py-16 lg:py-24">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 sm:mb-4">
             Welcome to Soul Space.
           </h1>
-          <h2 className="text-5xl font-extrabold mb-8">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 sm:mb-8 leading-tight">
             Your Pocket Companion for <span className="text-blue-500">Mental Well-being</span>
           </h2>
-          <p className="text-lg mb-8">
+          <p  className="text-lg mb-4 sm:mb-8 text-center">
             Stressed? Find calm here. Simple tools for your well-being. Breathe, reflect, and center yourself. Your journey to peace starts now.
           </p>
           <Link href="/form">
@@ -35,18 +35,18 @@ export default function Main() {
           </Link>
         </div>
 
-        <div className="flex justify-center mt-16 space-x-12 relative z-10">
+        <div className="flex justify-center mt-8 sm:mt-12 md:mt-16 space-x-6 sm:space-x-12 relative z-10">
           <div className="text-center">
-            <p className="text-4xl font-bold">10K+</p>
-            <p className="text-lg">Active Users</p>
+            <p className="text-3xl sm:text-4xl font-bold">10K+</p>
+            <p className="text-sm sm:text-lg">Active Users</p>
           </div>
           <div className="text-center">
-            <p className="text-4xl font-bold">5+</p>
-            <p className="text-lg">Interactive Games</p>
+            <p className="text-3xl sm:text-4xl font-bold">5+</p>
+            <p className="text-sm sm:text-lg">Interactive Games</p>
           </div>
           <div className="text-center">
-            <p className="text-4xl font-bold">95%</p>
-            <p className="text-lg">Happy Users</p>
+            <p className="text-3xl sm:text-4xl font-bold">95%</p>
+            <p className="text-sm sm:text-lg">Happy Users</p>
           </div>
         </div>
       </main>
