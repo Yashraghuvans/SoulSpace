@@ -130,13 +130,13 @@ const MentalHealthForm = () => {
         }
 
         if (calculatedMentalHealthScore >= 1 && calculatedMentalHealthScore <= 3) {
-            wellnessSolution = <p>It's important to prioritize your well-being.Repeat positive affirmations,play uplifting music.Spend time with nature.</p>;
+            wellnessSolution = <p className="text-sm sm:text-base">It's important to prioritize your well-being. Repeat positive affirmations, play uplifting music. Spend time with nature.</p>;
         } else if (calculatedMentalHealthScore >= 4 && calculatedMentalHealthScore <= 6) {
-            wellnessSolution = <p>Focus on incorporating stress-reducing techniques into your daily life. Consider listening to binaural audio designed for mood support, spending time in nature, or practicing deep breathing exercises could be beneficial.</p>;
+            wellnessSolution = <p className="text-sm sm:text-base">Focus on incorporating stress-reducing techniques into your daily life. Consider listening to binaural audio designed for mood support, spending time in nature, or practicing deep breathing exercises could be beneficial.</p>;
         } else if (calculatedMentalHealthScore >= 7 && calculatedMentalHealthScore <= 9) {
-            wellnessSolution = <p>You're doing well! Continue to maintain a healthy lifestyle. Consider adding activities that bring you joy and help manage stress, such as hobbies, creative pursuits, or spending quality time with loved ones.</p>;
+            wellnessSolution = <p className="text-sm sm:text-base">You're doing well! Continue to maintain a healthy lifestyle. Consider adding activities that bring you joy and help manage stress, such as hobbies, creative pursuits, or spending quality time with loved ones.</p>;
         } else if (calculatedMentalHealthScore === 10) {
-            wellnessSolution = <p>Excellent! You're indicating a strong sense of well-being. Keep prioritizing self-care, maintaining positive habits, and staying connected with your support system.</p>;
+            wellnessSolution = <p className="text-sm sm:text-base">Excellent! You're indicating a strong sense of well-being. Keep prioritizing self-care, maintaining positive habits, and staying connected with your support system.</p>;
         }
 
         setMentalWellnessSolution(wellnessSolution);
@@ -151,12 +151,12 @@ const MentalHealthForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
-                className="mb-6 p-4 border rounded shadow-md bg-white/80 backdrop-blur-sm"
+                className="mb-4 sm:mb-6 p-4 border rounded shadow-md bg-white/80 backdrop-blur-sm"
             >
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">{question.text}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-800">{question.text}</h3>
                 <div className="space-y-2">
                     {question.options.map((option) => (
-                        <label key={option.value} className="block text-gray-700">
+                        <label key={option.value} className="block text-gray-700 text-sm sm:text-base">
                             <input
                                 type="radio"
                                 name={`question-${question.id}`}
@@ -179,17 +179,17 @@ const MentalHealthForm = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.4 }}
-            className="mt-8 p-6 border rounded shadow-md bg-white/80 backdrop-blur-sm text-center"
+            className="mt-6 sm:mt-8 p-4 sm:p-6 border rounded shadow-md bg-white/80 backdrop-blur-sm text-center"
         >
-            <h2 className="text-2xl font-bold mb-4 text-blue-600">Your Results</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-blue-600">Your Results</h2>
             {mentalHealthScore !== null && (
                 <motion.p
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.3 }}
-                    className="mb-2 text-gray-800"
+                    className="mb-1 sm:mb-2 text-gray-800 text-sm sm:text-base"
                 >
-                    Overall Mental Wellness Score: <span className={`font-semibold text-xl ${mentalHealthScore <= 4 ? 'text-red-500' : mentalHealthScore <= 7 ? 'text-yellow-500' : 'text-green-500'}`}>{mentalHealthScore}/10</span>
+                    Overall Mental Wellness Score: <span className={`font-semibold text-lg ${mentalHealthScore <= 4 ? 'text-red-500' : mentalHealthScore <= 7 ? 'text-yellow-500' : 'text-green-500'}`}>{mentalHealthScore}/10</span>
                 </motion.p>
             )}
             {mentalAgeScore !== null && (
@@ -197,14 +197,14 @@ const MentalHealthForm = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.3 }}
-                    className="mb-4 text-gray-800"
+                    className="mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base"
                 >
-                    Estimated Mental Age Score (based on stress): <span className={`font-semibold text-xl ${mentalAgeScore <= 4 ? 'text-yellow-500' : 'text-green-500'}`}>{mentalAgeScore}/10</span>
+                    Estimated Mental Age Score (based on stress): <span className={`font-semibold text-lg ${mentalAgeScore <= 4 ? 'text-yellow-500' : 'text-green-500'}`}>{mentalAgeScore}/10</span>
                 </motion.p>
             )}
             {mentalWellnessSolution && (
-                <div className="mt-4 text-left">
-                    <h3 className="font-semibold mb-2">Recommendation based on Overall Score:</h3>
+                <div className="mt-2 sm:mt-4 text-left">
+                    <h3 className="font-semibold mb-2 text-sm sm:text-base">Recommendation based on Overall Score:</h3>
                     {mentalWellnessSolution}
                 </div>
             )}
@@ -213,7 +213,7 @@ const MentalHealthForm = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.3 }}
                 onClick={() => { setShowResults(false); setCurrentQuestion(0); setAnswers({}); setMentalHealthScore(null); setMentalAgeScore(null); setMentalWellnessSolution(null); }}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 sm:mt-4 text-sm sm:text-base"
             >
                 Retake the Quiz
             </motion.button>
@@ -230,9 +230,9 @@ const MentalHealthForm = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.3 }}
-                        className="w-1/2 max-h-[90vh] bg-white/50 rounded-lg shadow-xl overflow-y-auto p-6"
+                        className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 max-h-[95vh] bg-white/50 rounded-lg shadow-xl overflow-y-auto p-4 sm:p-6"
                     >
-                        <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">Mental Wellness Check</h1>
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-4 sm:mb-6 text-blue-600">Mental Wellness Check</h1>
                         {!showResults ? (
                             <motion.div
                                 key={currentQuestion}
@@ -249,7 +249,7 @@ const MentalHealthForm = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={prevQuestion}
-                                            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                                            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded text-sm sm:text-base"
                                         >
                                             Previous
                                         </motion.button>
@@ -259,7 +259,7 @@ const MentalHealthForm = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={nextQuestion}
-                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm sm:text-base"
                                         >
                                             Next
                                         </motion.button>
@@ -268,7 +268,7 @@ const MentalHealthForm = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={handleSubmit}
-                                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-sm sm:text-base"
                                         >
                                             Get Scores
                                         </motion.button>
