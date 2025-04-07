@@ -1,6 +1,6 @@
 <img src='https://github.com/Yashraghuvans/SoulSpace/blob/main/public/logo.png' height='200' width='400' />
 
-# SoulSpace
+# [SoulSpace](https://soul-space-eight.vercel.app/)
  
 This is a React component built with Next.js and styled with Tailwind CSS, designed to help users find relevant coping skills based on their current feelings and available time. It's part of the larger "Soul Space" project, aiming to provide immediate mood support and increase mental health awareness.
 
