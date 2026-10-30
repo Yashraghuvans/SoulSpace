@@ -1,90 +1,95 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
 
-const Card = ({ data }) => {
-    return (
-        <div className="flex flex-col justify-between rounded-lg bg-white w-full sm:w-72 h-[370px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-            <div className="relative mt-6 mx-4 rounded-lg bg-blue-500 shadow-lg shadow-blue-500/40 h-56 flex items-center justify-center">
-                <img
-                    src={data.imgUrl}
-                    alt={data.title}
-                    className="rounded-lg object-cover h-[22vh] w-[22vw]"
-                />
-            </div>
-            <div className="border-none py-6 px-6 text-center">
-                <p className="text-gray-700 tracking-normal leading-5 font-semibold text-xl mb-2">
-                    {data.title}
-                </p>
-                <p className="text-gray-600">
-                    {data.description}
-                </p>
-            </div>
-            <div className="py-3 px-4 border-t border-gray-200 flex items-center justify-center bg-[rgba(0,140,255,0.082)] rounded-b-lg">
-                <Link href={data.url}>
-                    <button
-                        type="button"
-                        className="select-none border-none outline-none shadow-md shadow-blue-500/40 text-white uppercase font-bold text-sm py-3 px-6 bg-blue-500 rounded-md"
-                    >
-                        {data.action}
-                    </button>
-                </Link>
-            </div>
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "motion/react";
+import FadeIn from "./FadeIn";
+import SectionHeading from "./SectionHeading";
+
+function ToolCard({ data, index }) {
+  return (
+    <FadeIn delay={index * 0.06} y={20}>
+      <motion.article
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-elevated"
+        whileHover={{ y: -4 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+      >
+        <div className="relative aspect-[4/3] overflow-hidden bg-surface-muted">
+          <Image
+            src={data.imgUrl}
+            alt=""
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            sizes="(max-width: 768px) 100vw, 25vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-elevated/80 via-transparent to-transparent" />
         </div>
-    );
-};
-
-const CardList = ({ cardsData }) => {
-    return (
-        <div
-            className="bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/journal.jpg')" }}
-        >
-            <div className="grid grid-cols-1 sm:grid-cols-4 sm:grid-rows-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-4 justify-center px-5 py-10 bg-black/70">
-                {cardsData.map((card, index) => (
-                    <Card key={index} data={card} />
-                ))}
-            </div>
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <h3 className="text-lg font-semibold text-text">{data.title}</h3>
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-text-muted">
+            {data.description}
+          </p>
+          <Link
+            href={data.url}
+            className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+          >
+            {data.action}
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+              →
+            </span>
+          </Link>
         </div>
-    );
-};
+      </motion.article>
+    </FadeIn>
+  );
+}
 
-const App = () => {
-    const cardInformation = [
-        {
-            title: 'Binaural Beats',
-            description: 'Tune Your Mind with Soul Space.',
-            action: 'Explore',
-            url: '/beats',
-            imgUrl: '/beats.gif',
-        },
-        {
-            title: 'Calm & Support',
-            description: 'Support for Mental Health.',
-            action: 'Explore',
-            url: '/copup',
-            imgUrl: '/back1.jpg',
-        },
-        {
-            title: 'Mental Wellness Check',
-            description: 'Assess Your Mental Wellness.',
-            action: 'Explore',
-            url: '/form',
-            imgUrl: '/back3.jpg',
-        },
-        {
-            title: 'Emotion Wheel Journal',
-            description: 'Explore Your Emotions.',
-            action: 'Explore',
-            url: '/emotionWheel',
-            imgUrl: '/journal.jpg',
-        },
-    ];
+const cardInformation = [
+  {
+    title: "Binaural beats",
+    description: "Tune your mind with calming frequencies tailored to your state.",
+    action: "Open beats",
+    url: "/beats",
+    imgUrl: "/beats.gif",
+  },
+  {
+    title: "Calm & support",
+    description: "Match coping skills to how you feel and the time you have.",
+    action: "Find support",
+    url: "/copup",
+    imgUrl: "/back1.jpg",
+  },
+  {
+    title: "Wellness survey",
+    description: "A short check-in to reflect on stress, mood, and rest.",
+    action: "Start survey",
+    url: "/form",
+    imgUrl: "/back3.jpg",
+  },
+  {
+    title: "Emotion journal",
+    description: "Name what you feel and capture thoughts in one calm space.",
+    action: "Open journal",
+    url: "/emotionWheel",
+    imgUrl: "/journal.jpg",
+  },
+];
 
-    return (
-        <div>
-            <CardList cardsData={cardInformation} />
+export default function Cards() {
+  return (
+    <section id="tools" className="section-pad border-t border-border bg-surface">
+      <div className="container-wide">
+        <SectionHeading
+          eyebrow="Toolkit"
+          title="Everything in one calm place"
+          description="Four focused experiences — sound, support, reflection, and check-ins — built to work on any screen."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-6">
+          {cardInformation.map((card, index) => (
+            <ToolCard key={card.url} data={card} index={index} />
+          ))}
         </div>
-    );
-};
-
-export default App;
+      </div>
+    </section>
+  );
+}

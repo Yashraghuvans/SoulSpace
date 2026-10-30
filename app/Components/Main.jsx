@@ -1,55 +1,114 @@
-import Head from 'next/head';
-import Link from 'next/link';
+"use client";
+
+import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import DashboardBrowserFrame from "./DashboardBrowserFrame";
+import HeroBackground from "./HeroBackground";
+
+const stats = [
+  { value: "15K+", label: "Active users" },
+  { value: "4", label: "Wellness tools" },
+  { value: "90%", label: "Report feeling better" },
+];
 
 export default function Main() {
+  const reduce = useReducedMotion();
+
   return (
-    <div>
-      <Head>
-        <title>Soul Space</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <section
+      id="home"
+      className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden"
+    >
+      <HeroBackground />
 
-      <main id="home" className="relative text-white min-h-screen flex flex-col justify-center items-center px-6 sm:px-12 md:px-24 lg:px-0">
-        <video
-          autoPlay
-          loop
-          muted
-          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        >
-          <source src="/anim.mp4" type="video/mp4" />
-        </video>
-        <div className="text-center relative z-10 py-8 md:py-16 lg:py-24">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2 sm:mb-4">
-            Welcome to Soul Space.
-          </h1>
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 sm:mb-8 leading-tight">
-            Your Pocket Companion for <span className="text-blue-500">Mental Well-being</span>
-          </h2>
-          <p className="text-lg mb-4 sm:mb-8 text-center">
-            Stressed? Find calm here. Simple tools for your well-being. Breathe, reflect, and center yourself. Your journey to peace starts now.
-          </p>
-          <a href="#box">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">
-              Explore More
-            </button>
-          </a>
-        </div>
+      <div className="container-wide section-pad relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_min(100%,420px)] lg:gap-10 xl:grid-cols-[1fr_440px] xl:gap-14">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+            <motion.p
+              className="mb-4 text-xs sm:text-sm font-medium tracking-[0.25em] uppercase text-accent"
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Mental well-being, simplified
+            </motion.p>
 
-        <div className="flex justify-center mt-8 sm:mt-12 md:mt-16 space-x-6 sm:space-x-12 relative z-10">
-          <div className="text-center">
-            <p className="text-3xl sm:text-4xl font-bold">15K+</p>
-            <p className="text-sm sm:text-lg">Active Users</p>
+            <motion.h1
+              className="max-w-xl text-4xl sm:text-5xl lg:text-[2.75rem] xl:text-6xl font-semibold leading-[1.08] tracking-tight text-text"
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Your pocket companion for{" "}
+              <span className="text-accent">calm and clarity</span>
+            </motion.h1>
+
+            <motion.p
+              className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-text-muted"
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Breathe, reflect, and find support with gentle tools designed for
+              everyday mental wellness — no overwhelm, just space to reset.
+            </motion.p>
+
+            <motion.div
+              className="mt-10 flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4"
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.24 }}
+            >
+              <Link
+                href="#dashboard-preview"
+                className="inline-flex min-w-[11rem] items-center justify-center rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-surface transition-colors hover:bg-accent-hover"
+              >
+                See dashboard
+              </Link>
+              <Link
+                href="#tools"
+                className="inline-flex min-w-[11rem] items-center justify-center rounded-full border border-border px-7 py-3.5 text-sm font-medium text-text transition-colors hover:bg-white/[0.04]"
+              >
+                Explore tools
+              </Link>
+              <Link
+                href="/form"
+                className="inline-flex min-w-[11rem] items-center justify-center rounded-full border border-border px-7 py-3.5 text-sm font-medium text-text transition-colors hover:bg-white/[0.04]"
+              >
+                Wellness check
+              </Link>
+            </motion.div>
+
+            <motion.ul
+              className="mt-12 sm:mt-14 grid w-full max-w-lg grid-cols-3 gap-4 sm:gap-6 border-t border-border pt-8 lg:max-w-none"
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
+            >
+              {stats.map((item) => (
+                <li key={item.label} className="text-center lg:text-left">
+                  <p className="text-2xl sm:text-3xl font-semibold tabular-nums text-text">
+                    {item.value}
+                  </p>
+                  <p className="mt-1 text-xs sm:text-sm text-text-muted">{item.label}</p>
+                </li>
+              ))}
+            </motion.ul>
           </div>
-          <div className="text-center">
-            <p className="text-3xl sm:text-4xl font-bold">4+</p>
-            <p className="text-sm sm:text-lg">Support Tools</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl sm:text-4xl font-bold">90%</p>
-            <p className="text-sm sm:text-lg">Happy Users</p>
-          </div>
+
+          <motion.div
+            className="w-full max-w-md mx-auto lg:max-w-none lg:mx-0"
+            initial={reduce ? false : { opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="mb-3 text-center text-xs font-medium tracking-[0.15em] uppercase text-text-muted lg:text-left">
+              Dashboard preview
+            </p>
+            <DashboardBrowserFrame compact initialFrame={90} />
+          </motion.div>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }

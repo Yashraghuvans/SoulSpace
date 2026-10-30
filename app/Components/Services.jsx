@@ -1,116 +1,100 @@
-import React from 'react';
+"use client";
 
-const Services = () => {
-    const features = [
-        {
-            id: 1,
-            name: 'Binaural Beats',
-            subHead: 'Tune Into Tranquility: Heal Your Mind with Sound',
-            description: [
-                'By playing two slightly different frequencies in each ear, your brain perceives a third tone that can influence your mental state.',
-                'Creates a deeply immersive, therapeutic sound experience that promotes inner balance.',
-            ],
-        },
-        {
-            id: 2,
-            name: 'Instant Mood Booster',
-            subHead: 'Lift Your Spirits in Seconds!',
-            description: [
-                'Because sometimes, all it takes is a little nudge to feel a lot better.',
-                'Science-backed methods blended with feel-good activities to spark joy fast',
-            ],
-        },
-        {
-            id: 3,
-            name: 'Emotion Wheel Journaling',
-            subHead: 'Explore Your Emotions, One Color at a Time',
-            description: [
-                'Emotion Wheel Journaling is a powerful technique that helps you identify, label, and process your emotions with clarity.',
-                'Helps bridge the gap between feeling and understanding—essential for emotional regulation and personal growth.',
-            ],
-        },
-        {
-            id: 4,
-            name: 'Mental Health Awareness Questionnaire',
-            subHead: 'Understand Your Mind, One Answer at a Time',
-            description: [
-                'A Mental Health Awareness Questionnaire is a self-assessment tool designed to help individuals reflect on their emotional, psychological, and behavioral well-being.',
-                'Aims to increase awareness about mental health by helping users identify early signs of stress, anxiety, depression, or burnout.',
-            ],
-        },
-        {
-            id: 5,
-            name: 'Coping Skill Matcher',
-            subHead: 'Struggling? Let’s Match You with What Helps',
-            description: [
-                'The Coping Skill Matcher is an interactive tool that helps individuals find personalized strategies to manage stress, anxiety, and emotional challenges.',
-                'Offers a wide range of healthy coping mechanisms—like deep breathing, journaling, physical activity, grounding exercises, or creative expression.',
-            ],
-        },
-    ];
+import FadeIn from "./FadeIn";
+import SectionHeading from "./SectionHeading";
 
-    return (
-        <div
-            id="box"
-            className="bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/back2.jpg')" }}
-        >
-            <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/70 relative" id="features">
-                <div className="max-w-7xl mx-auto">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-white/80">
-                        <span className="text-blue-600 text-4xl sm:text-6xl">F</span>eatures
-                    </h2>
-                    <div className="relative">
-                        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[1px] bg-blue-800 z-0 hidden md:block"></div>
+const features = [
+  {
+    id: 1,
+    name: "Binaural beats",
+    subHead: "Heal your mind with sound",
+    description: [
+      "Two slightly different frequencies in each ear create a perceived tone that can shift mental state.",
+      "An immersive, therapeutic listen designed for balance and focus.",
+    ],
+  },
+  {
+    id: 2,
+    name: "Instant mood booster",
+    subHead: "Lift your spirits in seconds",
+    description: [
+      "Small nudges can change how the day feels.",
+      "Science-backed ideas blended with quick, feel-good activities.",
+    ],
+  },
+  {
+    id: 3,
+    name: "Emotion wheel journaling",
+    subHead: "Explore feelings, one layer at a time",
+    description: [
+      "Identify, label, and process emotions with more clarity.",
+      "Bridges the gap between feeling and understanding for healthier regulation.",
+    ],
+  },
+  {
+    id: 4,
+    name: "Mental health questionnaire",
+    subHead: "Understand your mind, one answer at a time",
+    description: [
+      "A self-assessment for emotional and behavioral well-being.",
+      "Helps spot early signs of stress, anxiety, or burnout.",
+    ],
+  },
+  {
+    id: 5,
+    name: "Coping skill matcher",
+    subHead: "Matched to what helps you",
+    description: [
+      "Personalized strategies for stress, anxiety, and emotional challenges.",
+      "Breathing, journaling, movement, grounding, and creative outlets.",
+    ],
+  },
+];
 
-                        <div
-                            className="absolute left-1/2 transform -translate-x-1/2 h-full w-[1px] bg-blue-700 opacity-20 z-0 hidden md:block"
-                            style={{ left: 'calc(50% - 0.5px)' }}
-                        ></div>
+export default function Services() {
+  return (
+    <section id="features" className="section-pad bg-surface-muted/40 border-t border-border">
+      <div className="container-wide">
+        <SectionHeading
+          eyebrow="Features"
+          title="Built for real moments"
+          description="Each tool is intentionally minimal — quick to open, easy to use, and respectful of your attention."
+        />
 
-                        <div className="relative z-10 space-y-10 md:space-y-16">
-                            {features.map((feature, index) => (
-                                <div key={feature.id} className="flex justify-center">
-                                    <div
-                                        className={`w-full max-w-md sm:max-w-lg md:max-w-2xl rounded-lg shadow-lg p-4 sm:p-6 relative ${
-                                            index % 2 === 0
-                                                ? 'bg-black/80 text-white/80'
-                                                : 'bg-white/80 text-black/80'
-                                        } sm:mx-4`}
-                                    >
-                                        <div
-                                            className={`absolute top-4 sm:top-6 -left-1 sm:-left-2 w-3 h-3 sm:w-4 sm:h-4 transform -translate-x-1/2 rotate-45 ${
-                                                index % 2 === 0 ? 'bg-white/80' : 'bg-black/80'
-                                            }`}
-                                        ></div>
-
-                                        <h3 className="text-lg sm:text-xl font-bold">{feature.name}</h3>
-                                        <p className={`mt-1 text-sm sm:text-lg ${index % 2 === 0 ? 'text-blue-400' : 'text-blue-600'}`}>
-                                            {feature.subHead}
-                                        </p>
-                                        <ul className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
-                                            {feature.description.map((item, i) => (
-                                                <li key={i} className="flex items-start text-sm sm:text-base">
-                                                    <span
-                                                        className={`mr-2 mt-[3px] sm:mt-1 ${
-                                                            index % 2 === 0 ? 'text-blue-400' : 'text-blue-500'
-                                                        }`}
-                                                    >
-                                                        ♥
-                                                    </span>
-                                                    <span>{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
-};
-
-export default Services;
+        <ol className="relative space-y-6 sm:space-y-8 max-w-3xl mx-auto">
+          <div
+            className="absolute left-[1.125rem] sm:left-6 top-2 bottom-2 w-px bg-border hidden sm:block"
+            aria-hidden
+          />
+          {features.map((feature, index) => (
+            <FadeIn key={feature.id} delay={index * 0.05} y={12}>
+              <li className="relative sm:pl-14">
+                <span
+                  className="absolute left-0 top-1.5 hidden sm:flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-elevated text-xs font-medium text-accent"
+                  aria-hidden
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <article className="rounded-2xl border border-border bg-surface-elevated/80 p-5 sm:p-6">
+                  <h3 className="text-lg font-semibold text-text">{feature.name}</h3>
+                  <p className="mt-1 text-sm text-accent">{feature.subHead}</p>
+                  <ul className="mt-4 space-y-2">
+                    {feature.description.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-2 text-sm leading-relaxed text-text-muted"
+                      >
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </li>
+            </FadeIn>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}

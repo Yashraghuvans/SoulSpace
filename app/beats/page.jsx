@@ -1,208 +1,202 @@
 "use client";
-import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import NavBar from '../Components/NavBar';
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import PageShell from "../Components/PageShell";
+import AppPanel from "../Components/AppPanel";
 
 const frequencyOptions = [
-    { value: 200, label: '200 Hz (Default)' },
-    { value: 150, label: '150 Hz' },
-    { value: 250, label: '250 Hz' },
+  { value: 200, label: "200 Hz (Default)" },
+  { value: 150, label: "150 Hz" },
+  { value: 250, label: "250 Hz" },
 ];
 
 const differenceOptions = [
-    { value: 10, label: '10 Hz (Default)' },
-    { value: 5, label: '5 Hz (Delta - Deep Sleep)' },
-    { value: 15, label: '15 Hz (Beta - Alertness)' },
-    { value: 20, label: '20 Hz (Beta - High Alertness)' },
-    { value: 40, label: '40 Hz (Gamma - Max Relax/Focus)' },
+  { value: 10, label: "10 Hz (Default)" },
+  { value: 5, label: "5 Hz (Delta — deep sleep)" },
+  { value: 15, label: "15 Hz (Beta — alertness)" },
+  { value: 20, label: "20 Hz (Beta — high alertness)" },
+  { value: 40, label: "40 Hz (Gamma — focus)" },
 ];
 
-const BinauralBeatsPlayer = () => {
-    const [baseFrequency, setBaseFrequency] = useState(200);
-    const [frequencyDifference, setFrequencyDifference] = useState(10);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [audioContext, setAudioContext] = useState(null);
-    const [oscillatorLeft, setOscillatorLeft] = useState(null);
-    const [oscillatorRight, setOscillatorRight] = useState(null);
-    const [gainNodeLeft, setGainNodeLeft] = useState(null);
-    const [gainNodeRight, setGainNodeRight] = useState(null);
+export default function BinauralBeatsPage() {
+  const [baseFrequency, setBaseFrequency] = useState(200);
+  const [frequencyDifference, setFrequencyDifference] = useState(10);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioContext, setAudioContext] = useState(null);
+  const [oscillatorLeft, setOscillatorLeft] = useState(null);
+  const [oscillatorRight, setOscillatorRight] = useState(null);
+  const [gainNodeLeft, setGainNodeLeft] = useState(null);
+  const [gainNodeRight, setGainNodeRight] = useState(null);
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            setAudioContext(audioCtx);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-            const gainL = audioCtx.createGain();
-            const gainR = audioCtx.createGain();
-            setGainNodeLeft(gainL);
-            setGainNodeRight(gainR);
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    setAudioContext(audioCtx);
 
-            const oscL = audioCtx.createOscillator();
-            const oscR = audioCtx.createOscillator();
-            setOscillatorLeft(oscL);
-            setOscillatorRight(oscR);
+    const gainL = audioCtx.createGain();
+    const gainR = audioCtx.createGain();
+    setGainNodeLeft(gainL);
+    setGainNodeRight(gainR);
 
-            oscL.connect(gainL);
-            oscR.connect(gainR);
-            gainL.connect(audioCtx.destination);
-            gainR.connect(audioCtx.destination);
+    const oscL = audioCtx.createOscillator();
+    const oscR = audioCtx.createOscillator();
+    setOscillatorLeft(oscL);
+    setOscillatorRight(oscR);
 
-            oscL.start();
-            oscR.start();
-            gainL.gain.setValueAtTime(0, audioCtx.currentTime);
-            gainR.gain.setValueAtTime(0, audioCtx.currentTime);
-        }
+    oscL.connect(gainL);
+    oscR.connect(gainR);
+    gainL.connect(audioCtx.destination);
+    gainR.connect(audioCtx.destination);
 
-        return () => {
-            if (audioContext) {
-                if (oscillatorLeft) oscillatorLeft.stop();
-                if (oscillatorRight) oscillatorRight.stop();
-            }
-        };
-    }, []);
+    oscL.start();
+    oscR.start();
+    gainL.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainR.gain.setValueAtTime(0, audioCtx.currentTime);
 
-    useEffect(() => {
-        if (oscillatorLeft && oscillatorRight && isPlaying && audioContext) {
-            oscillatorLeft.frequency.setValueAtTime(baseFrequency - frequencyDifference / 2, audioContext.currentTime);
-            oscillatorRight.frequency.setValueAtTime(baseFrequency + frequencyDifference / 2, audioContext.currentTime);
-            gainNodeLeft.gain.setValueAtTime(0.5, audioContext.currentTime);
-            gainNodeRight.gain.setValueAtTime(0.5, audioContext.currentTime);
-        } else if (!isPlaying && audioContext && gainNodeLeft && gainNodeRight) {
-            gainNodeLeft.gain.setValueAtTime(0, audioContext.currentTime);
-            gainNodeRight.gain.setValueAtTime(0, audioContext.currentTime);
-        }
-    }, [baseFrequency, frequencyDifference, isPlaying, oscillatorLeft, oscillatorRight, audioContext, gainNodeLeft, gainNodeRight]);
-
-    const togglePlay = () => {
-        if (!audioContext) return;
-        setIsPlaying(!isPlaying);
-        if (audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
+    return () => {
+      oscL.stop();
+      oscR.stop();
+      audioCtx.close();
     };
+  }, []);
 
-    const handleBaseFrequencyChange = (event) => {
-        setBaseFrequency(parseInt(event.target.value));
-    };
+  useEffect(() => {
+    if (!oscillatorLeft || !oscillatorRight || !audioContext || !gainNodeLeft || !gainNodeRight) {
+      return;
+    }
 
-    const handleFrequencyDifferenceChange = (event) => {
-        setFrequencyDifference(parseInt(event.target.value));
-    };
+    if (isPlaying) {
+      oscillatorLeft.frequency.setValueAtTime(
+        baseFrequency - frequencyDifference / 2,
+        audioContext.currentTime
+      );
+      oscillatorRight.frequency.setValueAtTime(
+        baseFrequency + frequencyDifference / 2,
+        audioContext.currentTime
+      );
+      gainNodeLeft.gain.setValueAtTime(0.35, audioContext.currentTime);
+      gainNodeRight.gain.setValueAtTime(0.35, audioContext.currentTime);
+    } else {
+      gainNodeLeft.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNodeRight.gain.setValueAtTime(0, audioContext.currentTime);
+    }
+  }, [
+    baseFrequency,
+    frequencyDifference,
+    isPlaying,
+    oscillatorLeft,
+    oscillatorRight,
+    audioContext,
+    gainNodeLeft,
+    gainNodeRight,
+  ]);
 
-    return (
-        <>
-            <div>
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    className="absolute top-0 left-0 w-full object-cover -z-10"
+  const togglePlay = () => {
+    if (!audioContext) return;
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+    setIsPlaying((p) => !p);
+  };
+
+  const fieldClass =
+    "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20";
+
+  return (
+    <PageShell mainClassName="relative pt-24 sm:pt-28 pb-16 min-h-screen px-4 sm:px-6">
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-30"
+        aria-hidden
+      >
+        <video autoPlay loop muted playsInline className="h-full w-full object-cover">
+          <source src="/beats_b.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-surface/85" />
+      </div>
+
+      <div className="container-wide">
+        <AppPanel
+          title="Binaural harmony"
+          subtitle="Tune your mind with Soul Space — adjust frequencies, then press play."
+          maxWidth="max-w-3xl"
+        >
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            <motion.div
+              className="shrink-0"
+              animate={{ rotate: isPlaying ? 360 : 0 }}
+              transition={{
+                duration: 8,
+                repeat: isPlaying ? Infinity : 0,
+                ease: "linear",
+              }}
+            >
+              <Image
+                src="/beats.gif"
+                alt="Binaural beats visual"
+                width={160}
+                height={160}
+                className="rounded-full border border-border"
+              />
+            </motion.div>
+
+            <div className="flex-1 w-full space-y-4">
+              <label className="block text-sm">
+                <span className="mb-1.5 block text-text-muted">Base frequency (Hz)</span>
+                <select
+                  className={fieldClass}
+                  value={baseFrequency}
+                  onChange={(e) => setBaseFrequency(parseInt(e.target.value, 10))}
                 >
-                    <source src="/beats_b.mp4" type="video/mp4" />
-                </video>
-                <NavBar />
-                <motion.div
-                    className="flex justify-center items-center min-h-screen bg-black/50 gap-12 px-4 sm:px-6 md:px-8 lg:px-12"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
+                  {frequencyOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="block text-sm">
+                <span className="mb-1.5 block text-text-muted">Frequency difference (Hz)</span>
+                <select
+                  className={fieldClass}
+                  value={frequencyDifference}
+                  onChange={(e) =>
+                    setFrequencyDifference(parseInt(e.target.value, 10))
+                  }
                 >
-                    <motion.div
-                        className="bg-white/70 flex flex-col md:flex-row justify-center items-center rounded-lg shadow-md p-6 md:p-8 lg:p-3"
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <motion.div
-                            className="mb-4 md:mb-0 md:mr-8 lg:mr-3"
-                            initial={{ rotate: 0 }}
-                            animate={{ rotate: isPlaying ? 360 : 0 }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        >
-                            <Image
-                                src="/beats.gif"
-                                alt="Soul Space Logo"
-                                width={200}
-                                height={200}
-                                className="rounded-full shadow-md bg-gradient-to-r from-blue-500 to-purple-500"
-                            />
-                        </motion.div>
-                        <div className="flex justify-center items-center flex-col text-center md:text-left">
-                            <motion.h1
-                                className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-2 md:mb-4 text-gray-800"
-                                initial={{ y: -50, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.5 }}
-                            >
-                                Binaural Harmony
-                            </motion.h1>
-                            <motion.h2
-                                className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-800"
-                                initial={{ y: -50, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.7 }}
-                            >
-                                Tune Your Mind with Soul Space
-                            </motion.h2>
+                  {differenceOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
-                            <div className="mb-2 md:mb-4 w-full md:w-auto">
-                                <label htmlFor="baseFrequency" className="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
-                                    Base Frequency (Hz):
-                                </label>
-                                <select
-                                    id="baseFrequency"
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    value={baseFrequency}
-                                    onChange={handleBaseFrequencyChange}
-                                >
-                                    {frequencyOptions.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+              <button
+                type="button"
+                onClick={togglePlay}
+                disabled={!audioContext}
+                className={`w-full rounded-full py-3 text-sm font-medium transition-colors ${
+                  isPlaying
+                    ? "bg-red-500/90 text-white hover:bg-red-500"
+                    : "bg-accent text-surface hover:bg-accent-hover"
+                } disabled:opacity-50`}
+              >
+                {isPlaying ? "Stop" : "Play"}
+              </button>
 
-                            <div className="mb-4 w-full md:w-auto">
-                                <label htmlFor="frequencyDifference" className="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
-                                    Frequency Difference (Hz):
-                                </label>
-                                <select
-                                    id="frequencyDifference"
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    value={frequencyDifference}
-                                    onChange={handleFrequencyDifferenceChange}
-                                >
-                                    {differenceOptions.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <motion.button
-                                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isPlaying ? 'bg-red-500 hover:bg-red-700' : ''
-                                    }`}
-                                type="button"
-                                onClick={togglePlay}
-                                disabled={!audioContext}
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                {isPlaying ? 'Stop' : 'Play'}
-                            </motion.button>
-
-                            {audioContext && audioContext.state === 'suspended' && (
-                                <p className="mt-2 text-sm text-yellow-500">AudioContext is suspended. Please interact with the page to enable audio.</p>
-                            )}
-                        </div>
-                    </motion.div>
-                </motion.div>
+              {audioContext?.state === "suspended" ? (
+                <p className="text-xs text-amber-400/90">
+                  Tap play once to enable audio in your browser.
+                </p>
+              ) : null}
             </div>
-        </>
-    );
-};
-
-export default BinauralBeatsPlayer;
+          </div>
+        </AppPanel>
+      </div>
+    </PageShell>
+  );
+}

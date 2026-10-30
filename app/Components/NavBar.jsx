@@ -1,130 +1,152 @@
 "use client";
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
 
-const NavBar = () => {
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const controls = useAnimation();
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/beats", label: "Beats" },
+  { href: "/copup", label: "Support" },
+  { href: "/emotionWheel", label: "Journal" },
+  { href: "/form", label: "Survey" },
+];
+
+export default function NavBar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-      if (currentScrollPos > prevScrollPos && visible) {
-        controls.start({ y: "-100%", transition: { duration: 0.3, ease: "easeInOut" } });
-        setVisible(false);
-      } else if (currentScrollPos < prevScrollPos && !visible) {
-        controls.start({ y: 0, transition: { duration: 0.3, ease: "easeInOut" } });
-        setVisible(true);
-      }
-
-      setPrevScrollPos(currentScrollPos);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      document.body.style.overflow = "";
     };
-  }, [prevScrollPos, visible, controls]);
+  }, [menuOpen]);
 
   return (
     <>
-      <motion.header
-        className="backdrop-blur-sm py-2 fixed w-full z-[90] font-semibold text-xl"
-        style={{ top: 0 }}
-        animate={controls}
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background,border,box-shadow] duration-300 ${
+          scrolled
+            ? "glass-panel border-b border-border shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+            : "bg-transparent"
+        }`}
       >
-        <div className="container mx-auto flex justify-between items-center px-6 sm:px-12 md:px-16 lg:px-24">
-          <div className="flex items-center">
-            <div className="rounded-full overflow-hidden w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20">
-              <Image src="/favicon.ico" alt="Profile" width={80} height={80} className="object-cover" />
-            </div>
-          </div>
-          <button
-            className="sm:hidden text-white text-2xl focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+        <div className="container-wide flex h-16 sm:h-[4.25rem] items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="flex items-center gap-3 min-w-0 group"
+            onClick={() => setMenuOpen(false)}
           >
-            ☰
-          </button>
-          <nav className="hidden sm:flex space-x-4 sm:space-x-6 md:space-x-7 lg:space-x-7 gap-2 sm:gap-4 md:gap-6">
-            <Link href="/" legacyBehavior>
-              <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Home</a>
-            </Link>
-            <Link href="/beats" legacyBehavior>
-              <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Beats</a>
-            </Link>
-            <Link href="/copup" legacyBehavior>
-              <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Support Tool</a>
-            </Link>
-            <Link href="/emotionWheel" legacyBehavior>
-              <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Journal</a>
-            </Link>
-            <Link href="/form" legacyBehavior>
-              <a className="text-white/90 hover:text-blue-500 text-sm sm:text-base md:text-lg">Survey</a>
+            <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-surface-elevated">
+              <Image
+                src="/favicon.ico"
+                alt="Soul Space"
+                width={40}
+                height={40}
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </span>
+            <span className="hidden sm:block font-medium tracking-tight text-text">
+              Soul Space
+            </span>
+          </Link>
+
+          <nav className="hidden md:flex items-center gap-1">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-full px-3.5 py-2 text-sm text-text-muted transition-colors hover:text-text hover:bg-white/[0.04]"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href="/copup"
+              className="ml-2 rounded-full bg-accent px-4 py-2 text-sm font-medium text-surface transition-colors hover:bg-accent-hover"
+            >
+              Get support
             </Link>
           </nav>
+
+          <button
+            type="button"
+            className="md:hidden rounded-lg border border-border p-2.5 text-text"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span className="sr-only">Menu</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+              {menuOpen ? (
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              ) : (
+                <path
+                  d="M4 7h16M4 12h16M4 17h16"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+          </button>
         </div>
-        <div className="w-full border-1 border-white/90 my-2"></div>
-      </motion.header>
-      <motion.div
-        className={`fixed top-0 right-0 h-full w-64 bg-black/90 z-[100] flex flex-col items-start p-6 space-y-4 ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
-      >
-        <button
-          className="text-white text-2xl self-end focus:outline-none"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          ✕
-        </button>
-        <Link href="/" legacyBehavior>
-          <a
-            className="text-white/90 hover:text-blue-500 text-lg"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </a>
-        </Link>
-        <Link href="/beats" legacyBehavior>
-          <a
-            className="text-white/90 hover:text-blue-500 text-lg"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Beats
-          </a>
-        </Link>
-        <Link href="/copup" legacyBehavior>
-          <a
-            className="text-white/90 hover:text-blue-500 text-lg"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Support Tool
-          </a>
-        </Link>
-        <Link href="/emotionWheel" legacyBehavior>
-          <a
-            className="text-white/90 hover:text-blue-500 text-lg"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Journal
-          </a>
-        </Link>
-        <Link href="/form" legacyBehavior>
-          <a
-            className="text-white/90 hover:text-blue-500 text-lg"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Survey
-          </a>
-        </Link>
-      </motion.div>
+      </header>
+
+      <AnimatePresence>
+        {menuOpen ? (
+          <>
+            <motion.button
+              type="button"
+              className="fixed inset-0 z-[60] bg-black/60 md:hidden"
+              aria-label="Close menu overlay"
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.nav
+              className="fixed right-0 top-0 z-[70] flex h-full w-[min(100%,20rem)] flex-col gap-1 border-l border-border glass-panel p-6 pt-20 md:hidden"
+              initial={reduce ? false : { x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 380, damping: 36 }}
+            >
+              {links.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={reduce ? false : { opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  <Link
+                    href={link.href}
+                    className="block rounded-xl px-4 py-3 text-lg text-text hover:bg-white/[0.04]"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.nav>
+          </>
+        ) : null}
+      </AnimatePresence>
     </>
   );
-};
-
-export default NavBar;
+}

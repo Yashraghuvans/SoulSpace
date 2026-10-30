@@ -1,222 +1,187 @@
 "use client";
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import NavBar from '../Components/NavBar';
-import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+
+import { useState } from "react";
+import { motion } from "motion/react";
+import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+import PageShell from "../Components/PageShell";
+import AppPanel from "../Components/AppPanel";
 
 const emotionWheel = {
-    core: ['Happy', 'Sad', 'Angry', 'Fearful', 'Surprised', 'Disgusted'],
-    secondary: {
-        Happy: ['Joyful', 'Excited', 'Content', 'Proud'],
-        Sad: ['Lonely', 'Depressed', 'Grief', 'Disappointed'],
-        Angry: ['Frustrated', 'Irritated', 'Furious', 'Resentful'],
-        Fearful: ['Anxious', 'Scared', 'Terrified', 'Insecure'],
-        Surprised: ['Amazed', 'Confused', 'Astonished', 'Shocked'],
-        Disgusted: ['Repulsed', 'Appalled', 'Offended', 'Revolted'],
+  core: ["Happy", "Sad", "Angry", "Fearful", "Surprised", "Disgusted"],
+  secondary: {
+    Happy: ["Joyful", "Excited", "Content", "Proud"],
+    Sad: ["Lonely", "Depressed", "Grief", "Disappointed"],
+    Angry: ["Frustrated", "Irritated", "Furious", "Resentful"],
+    Fearful: ["Anxious", "Scared", "Terrified", "Insecure"],
+    Surprised: ["Amazed", "Confused", "Astonished", "Shocked"],
+    Disgusted: ["Repulsed", "Appalled", "Offended", "Revolted"],
+  },
+};
+
+export default function EmotionWheelJournalPage() {
+  const [selectedCoreEmotion, setSelectedCoreEmotion] = useState("");
+  const [selectedSecondaryEmotion, setSelectedSecondaryEmotion] = useState("");
+  const [journalEntry, setJournalEntry] = useState("");
+  const [journalEntries, setJournalEntries] = useState([
+    {
+      id: 1,
+      emotion: "Happy",
+      text: "Had a wonderful morning walk in the park. Grateful for simple moments that bring joy.",
+      timestamp: "05/04/2025, 03:42:36",
+      topic: "Morning serenity",
+      upvotes: 0,
+      downvotes: 0,
     },
-};
+    {
+      id: 2,
+      emotion: "Frustrated",
+      text: "Debugging took hours — taking a break to reset and return with fresh eyes.",
+      timestamp: "04/04/2025, 03:42:36",
+      topic: "Coding challenges",
+      upvotes: 0,
+      downvotes: 0,
+    },
+  ]);
 
-const EmotionWheelJournal = () => {
-    const [selectedCoreEmotion, setSelectedCoreEmotion] = useState('');
-    const [selectedSecondaryEmotion, setSelectedSecondaryEmotion] = useState('');
-    const [journalEntry, setJournalEntry] = useState('');
-    const [journalEntries, setJournalEntries] = useState([
-        {
-            id: 1,
-            emotion: 'Happy',
-            text: 'Had a wonderful morning walk in the park. The sun was shining, and the birds were singing. It felt so peaceful and refreshing. Grateful for these simple moments that bring so much joy. Planning to have a productive day ahead filled with positive energy.',
-            timestamp: '05/04/2025, 03:42:36',
-            topic: 'Morning Serenity',
-            upvotes: 0,
-            downvotes: 0,
-        },
-        {
-            id: 2,
-            emotion: 'Frustrated',
-            text: "Spent hours trying to debug a piece of code, and I'm still stuck. It's incredibly frustrating to keep hitting the same wall. Taking a short break now to clear my head. Hopefully, I can approach it with fresh eyes later and finally resolve this issue. Need to remember to be patient.",
-            timestamp: '04/04/2025, 03:42:36',
-            topic: 'Coding Challenges',
-            upvotes: 0,
-            downvotes: 0,
-        },
-    ]);
+  const fieldClass =
+    "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20";
 
-    const handleCoreEmotionChange = (event) => {
-        const emotion = event.target.value;
-        setSelectedCoreEmotion(emotion);
-        setSelectedSecondaryEmotion('');
+  const handleSaveEntry = () => {
+    if (!journalEntry.trim()) return;
+    const newEntry = {
+      id: Date.now(),
+      emotion: selectedSecondaryEmotion || selectedCoreEmotion || "Unspecified",
+      text: journalEntry.trim(),
+      timestamp: new Date().toLocaleString(),
+      topic: "Untitled",
+      upvotes: 0,
+      downvotes: 0,
     };
+    setJournalEntries([newEntry, ...journalEntries]);
+    setJournalEntry("");
+  };
 
-    const handleSecondaryEmotionChange = (event) => {
-        setSelectedSecondaryEmotion(event.target.value);
-    };
+  return (
+    <PageShell mainClassName="pt-24 sm:pt-28 pb-16 min-h-screen px-4 sm:px-6">
+      <div className="container-wide max-w-3xl">
+        <AppPanel
+          title="Emotion wheel journal"
+          subtitle="Select how you feel, then write freely — your entries stay on this device."
+        >
+          <div className="space-y-4">
+            <label className="block text-sm">
+              <span className="mb-1.5 block text-text-muted">Primary emotion</span>
+              <select
+                className={fieldClass}
+                value={selectedCoreEmotion}
+                onChange={(e) => {
+                  setSelectedCoreEmotion(e.target.value);
+                  setSelectedSecondaryEmotion("");
+                }}
+              >
+                <option value="">Select a core emotion</option>
+                {emotionWheel.core.map((emotion) => (
+                  <option key={emotion} value={emotion}>
+                    {emotion}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-    const handleJournalEntryChange = (event) => {
-        setJournalEntry(event.target.value);
-    };
-
-    const handleSaveEntry = () => {
-        if (journalEntry.trim()) {
-            const newEntry = {
-                id: Date.now(),
-                emotion: selectedSecondaryEmotion || selectedCoreEmotion || 'No Emotion Selected',
-                text: journalEntry.trim(),
-                timestamp: new Date().toLocaleString(),
-                topic: 'Untitled',
-                upvotes: 0,
-                downvotes: 0,
-            };
-            setJournalEntries([newEntry, ...journalEntries]);
-            setJournalEntry('');
-        }
-    };
-
-    const handleUpvote = (id) => {
-        setJournalEntries(prevEntries =>
-            prevEntries.map(entry =>
-                entry.id === id ? { ...entry, upvotes: entry.upvotes + 1 } : entry
-            )
-        );
-    };
-
-    const handleDownvote = (id) => {
-        setJournalEntries(prevEntries =>
-            prevEntries.map(entry =>
-                entry.id === id ? { ...entry, downvotes: entry.downvotes + 1 } : entry
-            )
-        );
-    };
-
-    return (
-        <>
-            <NavBar />
-            <motion.div
-                className="min-h-screen py-8 pt-20 sm:pt-24 md:pt-28 px-4 sm:px-6 md:px-8 lg:px-28 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('/journal.jpg')" }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-            >
-                <motion.div
-                    className="container mx-auto p-4 sm:p-6 bg-white/60 rounded-xl shadow-md"
-                    initial={{ scale: 0.8 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.5 }}
+            {selectedCoreEmotion ? (
+              <label className="block text-sm">
+                <span className="mb-1.5 block text-text-muted">More specifically</span>
+                <select
+                  className={fieldClass}
+                  value={selectedSecondaryEmotion}
+                  onChange={(e) => setSelectedSecondaryEmotion(e.target.value)}
                 >
-                    <motion.h2
-                        className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-3 sm:mb-4 text-blue-700 text-center"
-                        initial={{ y: -50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.7 }}
-                    >
-                        Emotion Wheel Journal
-                    </motion.h2>
-                    <motion.p
-                        className="text-black text-md mt-1 text-center mb-4 sm:mb-6"
-                        initial={{ y: 50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.7 }}
-                    >
-                        Tap into your emotional landscape. Select how you're feeling and use the space below to express your thoughts and experiences.
-                    </motion.p>
-                    <div className="mb-3 sm:mb-4">
-                        <label htmlFor="core-emotion" className="block text-gray-700 text-sm font-bold mb-1 sm:mb-2">
-                            How are you feeling primarily?
-                        </label>
-                        <select
-                            id="core-emotion"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={selectedCoreEmotion}
-                            onChange={handleCoreEmotionChange}
-                        >
-                            <option value="">Select a core emotion</option>
-                            {emotionWheel.core.map((emotion) => (
-                                <option key={emotion} value={emotion}>{emotion}</option>
-                            ))}
-                        </select>
-                    </div>
-                    {selectedCoreEmotion && (
-                        <div className="mb-3 sm:mb-4">
-                            <label htmlFor="secondary-emotion" className="block text-gray-700 text-sm font-bold mb-1 sm:mb-2">
-                                More specifically?
-                            </label>
-                            <select
-                                id="secondary-emotion"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                value={selectedSecondaryEmotion}
-                                onChange={handleSecondaryEmotionChange}
-                            >
-                                <option value="">Select a more specific emotion</option>
-                                {emotionWheel.secondary[selectedCoreEmotion]?.map((emotion) => (
-                                    <option key={emotion} value={emotion}>{emotion}</option>
-                                ))}
-                            </select>
-                        </div>
-                    )}
-                    <div className="mb-4">
-                        <label htmlFor="journal-entry" className="block text-gray-700 text-sm font-bold mb-1 sm:mb-2">
-                            Your Journal Entry:
-                        </label>
-                        <textarea
-                            id="journal-entry"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 sm:h-40 md:h-48 resize-vertical"
-                            value={journalEntry}
-                            onChange={handleJournalEntryChange}
-                            placeholder="Start writing here..."
-                        ></textarea>
-                    </div>
-                    <motion.button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto"
-                        onClick={handleSaveEntry}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Post Feeling
-                    </motion.button>
-                    {journalEntries.length > 0 && (
-                        <motion.div
-                            className="mt-6 sm:mt-8"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-700">Past Entries:</h3>
-                            <div className="space-y-3 sm:space-y-4">
-                                {journalEntries.map((entry, index) => (
-                                    <motion.div
-                                        key={entry.id}
-                                        className="bg-white rounded-lg shadow-sm border p-3 sm:p-4"
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                                    >
-                                        <div className="flex items-center mb-2">
-                                            <div className="rounded-full bg-gray-300 h-6 w-6 sm:h-8 sm:w-8 flex items-center justify-center font-semibold text-gray-700 text-sm sm:text-base">
-                                                {entry.emotion.charAt(0).toUpperCase()}
-                                            </div>
-                                            <div className="ml-2 sm:ml-3">
-                                                <p className="font-semibold text-gray-800 text-sm sm:text-base">{entry.topic}</p>
-                                                <p className="text-gray-500 text-xs sm:text-sm">{entry.emotion} - {entry.timestamp}</p>
-                                            </div>
-                                        </div>
-                                        <p className="text-gray-700 mb-2 text-sm sm:text-base">{entry.text}</p>
-                                        <div className="flex items-center space-x-3 sm:space-x-4 text-gray-600 text-xs sm:text-sm">
-                                            <button onClick={() => handleUpvote(entry.id)} className="flex items-center hover:text-blue-500 focus:outline-none">
-                                                <FaThumbsUp className="h-4 w-4 mr-1" /> {entry.upvotes}
-                                            </button>
-                                            <button onClick={() => handleDownvote(entry.id)} className="flex items-center hover:text-red-500 focus:outline-none">
-                                                <FaThumbsDown className="h-4 w-4 mr-1" /> {entry.downvotes}
-                                            </button>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </motion.div>
-                    )}
-                </motion.div>
-            </motion.div>
-        </>
-    );
-};
+                  <option value="">Optional refinement</option>
+                  {emotionWheel.secondary[selectedCoreEmotion]?.map((emotion) => (
+                    <option key={emotion} value={emotion}>
+                      {emotion}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
 
-export default EmotionWheelJournal;
+            <label className="block text-sm">
+              <span className="mb-1.5 block text-text-muted">Journal entry</span>
+              <textarea
+                className={`${fieldClass} min-h-[8rem] resize-y`}
+                value={journalEntry}
+                onChange={(e) => setJournalEntry(e.target.value)}
+                placeholder="Start writing here…"
+              />
+            </label>
+
+            <button
+              type="button"
+              onClick={handleSaveEntry}
+              className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-surface hover:bg-accent-hover"
+            >
+              Save entry
+            </button>
+          </div>
+
+          {journalEntries.length > 0 ? (
+            <div className="mt-10 space-y-3">
+              <h3 className="text-sm font-medium text-text-muted">Past entries</h3>
+              {journalEntries.map((entry, index) => (
+                <motion.article
+                  key={entry.id}
+                  className="rounded-xl border border-border bg-surface/50 p-4"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.04 }}
+                >
+                  <div className="flex gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-medium text-accent">
+                      {entry.emotion.charAt(0)}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="font-medium text-text">{entry.topic}</p>
+                      <p className="text-xs text-text-muted">
+                        {entry.emotion} · {entry.timestamp}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-text-muted">{entry.text}</p>
+                  <div className="mt-3 flex gap-4 text-xs text-text-muted">
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1 hover:text-accent"
+                      onClick={() =>
+                        setJournalEntries((prev) =>
+                          prev.map((e) =>
+                            e.id === entry.id ? { ...e, upvotes: e.upvotes + 1 } : e
+                          )
+                        )
+                      }
+                    >
+                      <FaThumbsUp /> {entry.upvotes}
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1 hover:text-red-400"
+                      onClick={() =>
+                        setJournalEntries((prev) =>
+                          prev.map((e) =>
+                            e.id === entry.id ? { ...e, downvotes: e.downvotes + 1 } : e
+                          )
+                        )
+                      }
+                    >
+                      <FaThumbsDown /> {entry.downvotes}
+                    </button>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          ) : null}
+        </AppPanel>
+      </div>
+    </PageShell>
+  );
+}

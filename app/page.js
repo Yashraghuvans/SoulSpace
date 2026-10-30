@@ -1,24 +1,19 @@
-import React from 'react'
-import NavBar from './Components/NavBar'
-import Main from './Components/Main'
-import Services from './Components/Services'
-import Card from './Components/Cards'
-import Footer from './Components/footer'
+import NavBar from "./Components/NavBar";
+import Main from "./Components/Main";
+import DashboardPreviewSection from "./Components/DashboardPreviewSection";
+import Cards from "./Components/Cards";
+import Services from "./Components/Services";
+import Footer from "./Components/footer";
 
-const page = () => {
+export default function HomePage() {
   return (
-    <>
-      <div className='bg-black/70' id='home'>
-        <NavBar />
-        <div className='h-full'>
-          <Main />
-        </div>
-        <Card />
-        <Services/>
-        <Footer/>
-      </div>
-    </>
-  )
+    <div className="min-h-screen bg-surface text-text">
+      <NavBar />
+      <Main />
+      <DashboardPreviewSection />
+      <Cards />
+      <Services />
+      <Footer />
+    </div>
+  );
 }
-
-export default page
