@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "22.14.0",
+    "@types/node": "26.6.6",
     "@types/react": "19.3.0",
     "tailwindcss": "^4",
     "typescript": "7.0.2"
