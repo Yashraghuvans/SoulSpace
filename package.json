@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@remotion/player": "^4.0.539",
-    "motion": "^14.9.0",
+    "motion": "^14.10.1",
     "next": "^15.5.28",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
