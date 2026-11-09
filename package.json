@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@remotion/player": "^4.0.539",
+    "@remotion/player": "^4.0.541",
     "motion": "^14.9.0",
     "next": "^15.5.28",
     "react": "^19.1.0",
